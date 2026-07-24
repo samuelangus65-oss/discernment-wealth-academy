@@ -815,26 +815,15 @@ img { max-width: 100%; display: block; }
         <div id="moneyEmailCapture" style="display:none; margin-top:18px; padding:18px 20px; background:var(--ivory); border-radius:10px; border:1px solid var(--line);">
           <div style="font-family:var(--serif); font-weight:600; font-size:15px; color:var(--wine); margin-bottom:8px;">Want this sent to you?</div>
           <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:12px;">Enter your email and Samuel will personally send you your result, along with the Foundation pillar most worth starting with for your pattern, usually within a day or two. No spam, unsubscribe any time.</p>
-          <form id="money-email-form" action="https://formspree.io/f/xrenozvj" method="POST" style="display:flex; gap:10px; flex-wrap:wrap;">
-            <input type="email" id="money-email-input" name="email" data-fs-field required placeholder="you@example.com" style="flex:1; min-width:200px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:14px; font-family:var(--mono); background:var(--paper);">
+          <form id="money-email-form" action="https://formspree.io/f/xrenozvj" method="POST" onsubmit="submitMoneyEmailForm(event)" style="display:flex; gap:10px; flex-wrap:wrap;">
+            <input type="email" id="money-email-input" name="email" required placeholder="you@example.com" style="flex:1; min-width:200px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:14px; font-family:var(--mono); background:var(--paper);">
             <input type="hidden" name="money_pattern" id="moneyPatternHidden" value="">
-            <button type="submit" data-fs-submit-btn class="btn btn-primary">Send my result</button>
+            <button type="submit" id="money-email-submit-btn" class="btn btn-primary">Send my result</button>
           </form>
-          <div data-fs-error="email" style="font-size:12.5px; color:var(--wine); margin-top:6px;"></div>
-          <div data-fs-error style="font-size:12.5px; color:var(--wine); margin-top:6px;"></div>
-          <div data-fs-success style="display:none; margin-top:12px; padding:12px 14px; background:#fff; border-radius:8px; border-left:3px solid var(--sage-deep); font-size:13.5px; color:var(--text-2);">Thank you, that's on its way to Samuel now. He'll be in touch personally within a day or two.</div>
+          <div id="money-email-error" style="display:none; font-size:12.5px; color:var(--wine); margin-top:8px;"></div>
+          <div id="money-email-success" style="display:none; margin-top:12px; padding:12px 14px; background:#fff; border-radius:8px; border-left:3px solid var(--sage-deep); font-size:13.5px; color:var(--text-2);">Thank you, that's on its way to Samuel now. He'll be in touch personally within a day or two.</div>
         </div>
       </div>
-
-      <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
-      <script>
-        (function () {
-          window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-          window.addEventListener('DOMContentLoaded', function () {
-            formspree('initForm', { formElement: '#money-email-form', formId: 'xrenozvj' });
-          });
-        })();
-      </script>
 
       <div class="tool-card">
         <h4>Scheme Check</h4>
@@ -1130,6 +1119,44 @@ function runBudgetToInvest() {
       `<div class="calc-result-row"><span class="calc-result-label">Available each month</span><span class="calc-result-value">${fmt(available)}</span></div>` +
       `<p class="calc-disclaimer" style="margin-top:12px">This is the figure to divide between short-term saving and, once your emergency fund is in place, investing.</p>`;
   }
+}
+
+function submitMoneyEmailForm(event) {
+  event.preventDefault();
+  const form = document.getElementById('money-email-form');
+  const submitBtn = document.getElementById('money-email-submit-btn');
+  const errorBox = document.getElementById('money-email-error');
+  const successBox = document.getElementById('money-email-success');
+
+  errorBox.style.display = 'none';
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
+
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { 'Accept': 'application/json' }
+  })
+    .then(response => {
+      if (response.ok) {
+        form.style.display = 'none';
+        successBox.style.display = 'block';
+      } else {
+        return response.json().then(data => {
+          const message = (data && data.errors && data.errors.map(e => e.message).join(', ')) || 'Something went wrong, please try again in a moment.';
+          errorBox.textContent = message;
+          errorBox.style.display = 'block';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send my result';
+        });
+      }
+    })
+    .catch(() => {
+      errorBox.textContent = 'Could not connect. Please check your internet connection and try again.';
+      errorBox.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send my result';
+    });
 }
 
 function runMoneyQuiz() {
