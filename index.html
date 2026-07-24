@@ -674,18 +674,19 @@ img { max-width: 100%; display: block; }
 
       <div class="tool-card">
         <h4>Fee Impact</h4>
-        <p class="tool-note">The same investment, two different fee levels, over the same number of years.</p>
+        <p class="tool-note">The same investment, growing at the same rate before fees, compared at two different fee levels, over the same number of years.</p>
         <div class="calc-row">
           <div class="field"><label>Amount invested (£)</label><input type="number" id="feeAmount" value="10000"></div>
           <div class="field"><label>Years invested</label><input type="number" id="feeYears" value="30"></div>
         </div>
+        <div class="field" style="margin-bottom:14px"><label>Assumed annual growth before fees (%)</label><input type="number" id="feeGrowth" value="7" step="0.5"></div>
         <div class="calc-row">
-          <div class="field"><label>Assumed annual growth (%)</label><input type="number" id="feeGrowth" value="7" step="0.5"></div>
-          <div class="field"><label>Fee difference being compared (%)</label><input type="number" id="feeDiff" value="0.8" step="0.1"></div>
+          <div class="field"><label>Lower fee, e.g. a low-cost tracker (%)</label><input type="number" id="feeLow" value="0.2" step="0.05"></div>
+          <div class="field"><label>Higher fee, e.g. an actively managed fund (%)</label><input type="number" id="feeHigh" value="1.0" step="0.05"></div>
         </div>
         <button class="btn btn-primary calc-btn" onclick="runFeeImpact()">Calculate</button>
         <div class="calc-result" id="feeResult"></div>
-        <p class="calc-disclaimer">Illustrative only. Real fees vary by provider and product, always check the fee schedule before investing.</p>
+        <p class="calc-disclaimer">Illustrative only. Enter the actual ongoing charges shown on a fund or platform's own factsheet for a genuine comparison, real fees vary by provider and product.</p>
       </div>
 
       <div class="tool-card">
@@ -1077,13 +1078,14 @@ function runEmergencyFund() {
 }
 
 function runFeeImpact() {
-  const amount = parseFloat(document.getElementById('feeAmount').value) || 0;
-  const years  = parseFloat(document.getElementById('feeYears').value) || 0;
-  const growth = parseFloat(document.getElementById('feeGrowth').value) / 100 || 0;
-  const diff   = parseFloat(document.getElementById('feeDiff').value) / 100 || 0;
+  const amount  = parseFloat(document.getElementById('feeAmount').value) || 0;
+  const years   = parseFloat(document.getElementById('feeYears').value) || 0;
+  const growth  = parseFloat(document.getElementById('feeGrowth').value) / 100 || 0;
+  const lowFee  = parseFloat(document.getElementById('feeLow').value) / 100 || 0;
+  const highFee = parseFloat(document.getElementById('feeHigh').value) / 100 || 0;
 
-  const lowFeeValue  = amount * Math.pow(1 + growth, years);
-  const highFeeValue = amount * Math.pow(1 + (growth - diff), years);
+  const lowFeeValue  = amount * Math.pow(1 + growth - lowFee, years);
+  const highFeeValue = amount * Math.pow(1 + growth - highFee, years);
   const cost = lowFeeValue - highFeeValue;
   const fmt = n => '£' + Math.round(n).toLocaleString('en-GB');
 
