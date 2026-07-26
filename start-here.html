@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Here — Discernment Wealth Academy</title>
+<meta name="description" content="A tighter rein on what you already have. Free, no obligation, no sales pitch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --wine: #2B1620; --wine-2: #3D2233; --plum: #5B4B7A;
+  --brass: #B08D57; --brass-deep: #8C6B3F;
+  --ivory: #F2E9DC; --paper: #FBF7F0; --line: #E3D6C3;
+  --text: #231A1D; --text-2: #5C4F52; --text-3: #8F8083;
+  --sage: #A8B59E; --sage-deep: #6F8064;
+  --terracotta: #C97A5E; --terracotta-deep: #A65A40;
+  --radius: 14px; --shadow: 0 2px 16px rgba(43,22,32,0.08);
+  --serif: 'Fraunces', Georgia, serif; --sans: 'Inter', system-ui, sans-serif; --mono: 'IBM Plex Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--paper); color: var(--text); line-height: 1.65; font-size: 17px; }
+a { color: var(--brass-deep); }
+.container { max-width: 720px; margin: 0 auto; padding: 0 28px; }
+.btn { font-family: var(--sans); font-weight: 600; font-size: 15.5px; padding: 15px 30px; border-radius: 8px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--brass); color: var(--wine); }
+.btn-primary:hover { box-shadow: 0 6px 20px rgba(176,141,87,0.35); }
+.btn-ghost-dark { background: transparent; color: var(--wine); border: 1.5px solid var(--wine); }
+.btn-ghost-dark:hover { border-color: var(--brass-deep); color: var(--brass-deep); }
+
+.site-header { background: var(--wine); padding: 22px 0; text-align: center; }
+.brand-mark { display: inline-flex; width: 44px; height: 44px; border-radius: 10px; background: var(--brass); color: var(--wine); font-family: var(--serif); font-weight: 600; font-size: 22px; align-items: center; justify-content: center; margin-bottom: 8px; }
+.site-header h1 { font-family: var(--serif); font-size: 19px; color: #fff; font-weight: 600; }
+.site-header p { font-size: 12.5px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+
+.hero { padding: 56px 0 40px; text-align: center; }
+.hero h2 { font-family: var(--serif); font-size: 34px; font-weight: 600; color: var(--wine); line-height: 1.25; margin-bottom: 18px; }
+.hero .lede { font-size: 18px; color: var(--text-2); max-width: 520px; margin: 0 auto 28px; }
+.hero-actions { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-bottom: 8px; }
+.reassure { font-size: 13.5px; color: var(--text-3); margin-top: 16px; }
+
+.section { padding: 36px 0; border-top: 1px solid var(--line); }
+.section h3 { font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--wine); margin-bottom: 14px; text-align: center; }
+.steps { display: flex; flex-direction: column; gap: 16px; }
+.step { background: #fff; border-radius: var(--radius); padding: 18px 20px; border: 1px solid var(--line); display: flex; gap: 16px; align-items: flex-start; }
+.step-num { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--brass-deep); flex-shrink: 0; width: 30px; }
+.step p { font-size: 15px; color: var(--text-2); }
+.step strong { color: var(--wine); }
+
+.why-free { background: var(--ivory); border-radius: var(--radius); padding: 26px 28px; text-align: center; }
+.why-free p { font-size: 15px; color: var(--text-2); max-width: 500px; margin: 0 auto; }
+.why-free p + p { margin-top: 10px; }
+
+.crisis-box { background: var(--wine); color: rgba(255,255,255,0.9); border-radius: var(--radius); padding: 24px 26px; }
+.crisis-box h4 { font-family: var(--serif); font-size: 17px; color: var(--brass); margin-bottom: 8px; }
+.crisis-box p { font-size: 14.5px; line-height: 1.7; margin-bottom: 12px; }
+.crisis-box a { color: #fff; font-weight: 600; }
+
+.site-footer { background: var(--wine); color: rgba(255,255,255,0.6); padding: 26px 0; margin-top: 20px; text-align: center; font-size: 12.5px; }
+.site-footer a { color: rgba(255,255,255,0.8); }
+
+@media (max-width: 480px) { .hero h2 { font-size: 27px; } .container { padding: 0 20px; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand-mark">D</div>
+  <h1>Discernment Wealth Academy</h1>
+  <p>Understanding money. Building what matters.</p>
+</header>
+
+<div class="container">
+
+  <section class="hero">
+    <h2>Wondering where your money actually goes each month?</h2>
+    <p class="lede">You do not need to be good with investments to get a tighter rein on what you already have. This is a free, five minute place to start, nothing to buy, nothing to sign up for beyond your own curiosity.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="index.html#lesson-emergency">Take the free five minute reflection &rarr;</a>
+      <a class="btn btn-ghost-dark" href="index.html#free">Or browse everything free first</a>
+    </div>
+    <p class="reassure">No email required to look around. No cost at any point on this page.</p>
+  </section>
+
+  <section class="section">
+    <h3>Three simple steps, in your own time</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <p><strong>A short, honest reflection.</strong> Five questions about how money actually feels day to day, not a test, no right answers, just a clearer picture of what's really going on.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <p><strong>Free lessons at your own pace.</strong> Plain language, no jargon left unexplained, covering everything from a simple budget to knowing what an ISA actually does. Nothing timed, nothing you will be chased about.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <p><strong>Only if you want more.</strong> Deeper courses exist for anyone who wants to go further, but the foundations, the actual starting point most people need, stay free permanently.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="why-free">
+      <p>This is genuinely free, not a taster designed to lead somewhere expensive. The person behind it wanted people who have never felt like money or investing was "for them" to have a real place to start, without being sold to along the way.</p>
+      <p>Shared as a friend would share it, not as a financial adviser. Always seek regulated advice before making any investment decision.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="crisis-box">
+      <h4>If things feel urgent right now, not just unclear</h4>
+      <p>If you are dealing with a genuine financial shock today, a sudden bill, a loss of income, help already exists and does not depend on working through anything on this site first. The government's Crisis and Resilience Fund is run through local councils across England.</p>
+      <p><a href="https://www.turn2us.org.uk/get-support/information-for-your-situation/crisis-and-resilience-fund/what-is-the-crisis-and-resilience-fund" target="_blank" rel="noopener">Find your local scheme through Turn2us &rarr;</a></p>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  &copy; 2026 Discernment Wealth Academy &nbsp;&middot;&nbsp;
+  <a href="index.html">Full site</a> &nbsp;&middot;&nbsp;
+  <a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp;
+  <a href="terms.html">Terms</a> &nbsp;&middot;&nbsp;
+  <a href="https://www.fca.org.uk/scamsmart" target="_blank" rel="noopener">FCA ScamSmart</a>
+</footer>
+
+</body>
+</html>
