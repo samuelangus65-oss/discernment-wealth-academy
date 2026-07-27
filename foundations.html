@@ -826,11 +826,18 @@ img { max-width: 100%; display: block; }
 
         <div id="moneyEmailCapture" style="display:none; margin-top:18px; padding:18px 20px; background:var(--ivory); border-radius:10px; border:1px solid var(--line);">
           <div style="font-family:var(--serif); font-weight:600; font-size:15px; color:var(--wine); margin-bottom:8px;">Want this sent to you?</div>
-          <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:12px;">Enter your email and Samuel will personally send you your result, along with the Foundation pillar most worth starting with for your pattern, usually within a day or two. No spam, unsubscribe any time.</p>
-          <form id="money-email-form" action="https://formspree.io/f/xrenozvj" method="POST" onsubmit="submitMoneyEmailForm(event)" style="display:flex; gap:10px; flex-wrap:wrap;">
-            <input type="email" id="money-email-input" name="email" required placeholder="you@example.com" style="flex:1; min-width:200px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:14px; font-family:var(--mono); background:var(--paper);">
-            <input type="hidden" name="money_pattern" id="moneyPatternHidden" value="">
-            <button type="submit" id="money-email-submit-btn" class="btn btn-primary">Send my result</button>
+          <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:12px;">Enter your email and Samuel will personally send you your result, along with the Foundation pillar most worth starting with for your pattern, usually within a day or two.</p>
+          <form id="money-email-form" action="https://formspree.io/f/xrenozvj" method="POST" onsubmit="submitMoneyEmailForm(event)">
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <input type="email" id="money-email-input" name="email" required placeholder="you@example.com" style="flex:1; min-width:200px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:14px; font-family:var(--mono); background:var(--paper);">
+              <input type="hidden" name="money_pattern" id="moneyPatternHidden" value="">
+              <button type="submit" id="money-email-submit-btn" class="btn btn-primary">Send my result</button>
+            </div>
+            <label style="display:flex; align-items:flex-start; gap:8px; margin-top:14px; font-size:13px; color:var(--text-2); cursor:pointer;">
+              <input type="checkbox" name="marketing_consent" value="Yes, send occasional updates" style="margin-top:3px;">
+              <span>Yes, also email me occasional DWA learning updates and programme news. <a href="unsubscribe.html" target="_blank" style="color:inherit; text-decoration:underline;">Unsubscribe</a> at any time, one click, no email needed.</span>
+            </label>
+            <p style="font-size:12px; color:var(--text-3); margin-top:8px;">Leaving this unticked means your email is used only to send the result you asked for above, nothing else.</p>
           </form>
           <div id="money-email-error" style="display:none; font-size:12.5px; color:var(--wine); margin-top:8px;"></div>
           <div id="money-email-success" style="display:none; margin-top:12px; padding:12px 14px; background:#fff; border-radius:8px; border-left:3px solid var(--sage-deep); font-size:13.5px; color:var(--text-2);">Thank you, that is on its way to Samuel now. He will be in touch personally within a day or two.</div>
@@ -1224,8 +1231,16 @@ function runScamCheck() {
     var topBtn = document.getElementById('back-to-top');
     var resumeBtn = document.getElementById('resume-position');
     var savedPosition = 0;
-    var pauseTimer = null;
     var isJumping = false;
+
+    // Save your position specifically when you interact with a calculator,
+    // since that is the moment actually worth remembering, not just wherever
+    // scrolling happens to stop while browsing past other content.
+    document.querySelectorAll('.tool-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        if (!isJumping) { savedPosition = window.scrollY; }
+      });
+    });
 
     window.addEventListener('scroll', function () {
       var current = window.scrollY;
@@ -1234,17 +1249,8 @@ function runScamCheck() {
       if (current > 500) { topBtn.classList.add('visible'); }
       else { topBtn.classList.remove('visible'); }
 
-      // Remember where you actually paused, not the deepest point ever reached.
-      // Ignored while a button-triggered smooth scroll is still animating, so the
-      // animation itself cannot overwrite the position you were saved from.
-      if (!isJumping) {
-        clearTimeout(pauseTimer);
-        pauseTimer = setTimeout(function () {
-          if (current > 300) { savedPosition = current; }
-        }, 350);
-      }
-
-      // Resume: show only when there is a remembered position worth returning to.
+      // Resume: show only when there is a remembered position worth returning to,
+      // in either direction, above it or below it.
       if (savedPosition > 300 && Math.abs(savedPosition - current) > 400) {
         resumeBtn.classList.add('visible');
       } else {
