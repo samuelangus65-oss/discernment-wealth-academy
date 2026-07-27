@@ -119,6 +119,19 @@ img { max-width: 100%; display: block; }
 #back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
 #back-to-top:hover { background: var(--wine-2); }
 #back-to-top svg { width: 20px; height: 20px; }
+
+#resume-position {
+  position: fixed; bottom: 84px; right: 26px; z-index: 999;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--brass); color: var(--wine); border: none;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; box-shadow: 0 4px 16px rgba(43,22,32,0.25);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+#resume-position.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+#resume-position:hover { background: var(--brass-deep); color: var(--ivory); }
+#resume-position svg { width: 20px; height: 20px; }
 .btn-primary:hover { box-shadow: 0 6px 20px rgba(176,141,87,0.35); }
 .btn-terracotta { background: var(--terracotta); color: #fff; }
 .btn-terracotta:hover { box-shadow: 0 6px 20px rgba(201,122,94,0.35); }
@@ -1200,18 +1213,42 @@ function runScamCheck() {
 }
 </script>
 
+<button id="resume-position" aria-label="Return to where you were" title="Return to where you were">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+</button>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
 </button>
 <script>
   (function () {
-    var btn = document.getElementById('back-to-top');
+    var topBtn = document.getElementById('back-to-top');
+    var resumeBtn = document.getElementById('resume-position');
+    var deepestScroll = 0;
+
     window.addEventListener('scroll', function () {
-      if (window.scrollY > 500) { btn.classList.add('visible'); }
-      else { btn.classList.remove('visible'); }
+      var current = window.scrollY;
+
+      // Track the furthest point down the page actually reached.
+      if (current > deepestScroll) { deepestScroll = current; }
+
+      // Back to top: show once meaningfully down the page.
+      if (current > 500) { topBtn.classList.add('visible'); }
+      else { topBtn.classList.remove('visible'); }
+
+      // Resume: show only once scrolled back up from a genuinely deeper point.
+      if (deepestScroll > 700 && (deepestScroll - current) > 400) {
+        resumeBtn.classList.add('visible');
+      } else {
+        resumeBtn.classList.remove('visible');
+      }
     });
-    btn.addEventListener('click', function () {
+
+    topBtn.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    resumeBtn.addEventListener('click', function () {
+      window.scrollTo({ top: deepestScroll, behavior: 'smooth' });
     });
   })();
 </script>
