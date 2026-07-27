@@ -1223,20 +1223,29 @@ function runScamCheck() {
   (function () {
     var topBtn = document.getElementById('back-to-top');
     var resumeBtn = document.getElementById('resume-position');
-    var deepestScroll = 0;
+    var savedPosition = 0;
+    var pauseTimer = null;
+    var isJumping = false;
 
     window.addEventListener('scroll', function () {
       var current = window.scrollY;
-
-      // Track the furthest point down the page actually reached.
-      if (current > deepestScroll) { deepestScroll = current; }
 
       // Back to top: show once meaningfully down the page.
       if (current > 500) { topBtn.classList.add('visible'); }
       else { topBtn.classList.remove('visible'); }
 
-      // Resume: show only once scrolled back up from a genuinely deeper point.
-      if (deepestScroll > 700 && (deepestScroll - current) > 400) {
+      // Remember where you actually paused, not the deepest point ever reached.
+      // Ignored while a button-triggered smooth scroll is still animating, so the
+      // animation itself cannot overwrite the position you were saved from.
+      if (!isJumping) {
+        clearTimeout(pauseTimer);
+        pauseTimer = setTimeout(function () {
+          if (current > 300) { savedPosition = current; }
+        }, 350);
+      }
+
+      // Resume: show only when there is a remembered position worth returning to.
+      if (savedPosition > 300 && Math.abs(savedPosition - current) > 400) {
         resumeBtn.classList.add('visible');
       } else {
         resumeBtn.classList.remove('visible');
@@ -1244,11 +1253,17 @@ function runScamCheck() {
     });
 
     topBtn.addEventListener('click', function () {
+      savedPosition = window.scrollY; // remember exactly where you were, before jumping
+      isJumping = true;
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(function () { isJumping = false; }, 700);
     });
 
     resumeBtn.addEventListener('click', function () {
-      window.scrollTo({ top: deepestScroll, behavior: 'smooth' });
+      var target = savedPosition;
+      isJumping = true;
+      window.scrollTo({ top: target, behavior: 'smooth' });
+      setTimeout(function () { isJumping = false; }, 700);
     });
   })();
 </script>
