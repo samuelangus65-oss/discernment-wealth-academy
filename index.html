@@ -424,5 +424,16 @@ img { max-width: 100%; display: block; }
 </footer>
 
 
+<script>
+document.addEventListener("copy", function (e) {
+  var selection = window.getSelection().toString();
+  if (selection.trim().length > 0) {
+    e.clipboardData.setData("text/plain", selection + "
+
+Read more at discernmentwealthacademy.co.uk");
+    e.preventDefault();
+  }
+});
+</script>
 </body>
 </html>
