@@ -426,9 +426,9 @@ img { max-width: 100%; display: block; }
 
 <script>
 document.addEventListener("copy", function (e) {
-  var selection = window.getSelection().toString();
-  if (selection.trim().length > 0) {
-    e.clipboardData.setData("text/plain", selection + "
+  var selectedText = window.getSelection().toString();
+  if (selectedText.trim().length > 0) {
+    e.clipboardData.setData("text/plain", selectedText + "
 
 Read more at discernmentwealthacademy.co.uk");
     e.preventDefault();
