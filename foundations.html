@@ -66,6 +66,9 @@ img { max-width: 100%; display: block; }
 .nav-links { display: none; gap: 28px; font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.72); }
 .nav-links a:hover { color: #fff; }
 @media (min-width: 860px) { .nav-links { display: flex; } }
+.nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; padding: 4px 8px; }
+@media (max-width: 859px) { .nav-toggle { display: block; } }
+.nav-links.mobile-open { display: flex; flex-direction: column; gap: 16px; position: absolute; top: 100%; left: 0; right: 0; background: var(--wine); padding: 16px 24px; z-index: 20; }
 
 /* ============ FCA STRIP ============ */
 .fca-strip {
@@ -307,7 +310,7 @@ img { max-width: 100%; display: block; }
   <strong>Education only.</strong> Discernment Wealth Academy provides general financial education and information. Nothing here is personalised financial advice.
 </div>
 
-<header class="site-header">
+<header class="site-header" style="position:relative;">
   <div class="container header-inner">
     <a class="brand" href="index.html" style="text-decoration:none; color:inherit;">
       <div class="brand-mark"><svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="Discernment Wealth Academy compass mark"><circle cx="50" cy="50" r="42" fill="#F2E9DC" stroke="#2B1620" stroke-width="3"/><polygon points="50,12 50,50 60,50" fill="#B08D57"/><polygon points="50,12 50,50 40,50" fill="#B08D57"/><polygon points="50,88 50,50 60,50" fill="#2B1620"/><polygon points="50,88 50,50 40,50" fill="#2B1620"/><circle cx="50" cy="50" r="4.5" fill="#F2E9DC" stroke="#2B1620" stroke-width="1.5"/></svg></div>
@@ -316,7 +319,8 @@ img { max-width: 100%; display: block; }
         <p>Understanding money. Building what matters.</p>
       </div>
     </a>
-    <nav class="nav-links">
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav()">&#9776;</button>
+    <nav class="nav-links" id="mainNavLinks">
       <a href="#free">Free Resources</a>
       <a href="index.html#tiers">Learning Path</a>
       <a href="about.html">About</a>
@@ -326,7 +330,7 @@ img { max-width: 100%; display: block; }
 <section class="section" id="free">
   <div class="container">
     <div class="section-head">
-      <div class="section-eyebrow">Level Zero — Free</div>
+      <div class="section-eyebrow">Level 1 — Free Foundations</div>
       <h3>Start here, at no cost, before anything else.</h3>
       <p>The Education Hub is open to everyone. No sign-up required to use the tools below. This is where discernment begins, understanding the language, seeing the real cost of delay, and learning to spot a scheme before it costs you money.</p>
     </div>
@@ -407,7 +411,7 @@ img { max-width: 100%; display: block; }
 
       <div class="lesson-block">
         <h6>If you need help right now</h6>
-        <p>An emergency fund is something to build for the future. If you are facing a genuine financial shock today, a sudden loss of income, an unexpected bill you cannot cover, there is real support already in place, and building your own fund does not mean waiting until one exists before asking for that help now. The government's Crisis and Resilience Fund launched in April 2026, replacing the previous Household Support Fund, and is administered through your local council rather than centrally, so what is available and how to apply varies depending on where you live, and eligibility is assessed individually rather than by a fixed rule. It exists specifically for sudden, unexpected financial pressure, help with food, energy, or housing costs among them.</p>
+        <p>An emergency fund is something to build for the future. If you are facing a genuine financial shock today, a sudden loss of income, an unexpected bill you cannot cover, there is real support already in place, and building your own fund does not mean waiting until one exists before asking for that help now. In England, the government's Crisis and Resilience Fund launched in April 2026, replacing the previous Household Support Fund, and is administered through local councils, so what is available and how to apply varies depending on where you live, and eligibility is assessed individually rather than by a fixed rule. Scotland, Wales and Northern Ireland have different support arrangements, worth checking directly with your own local authority or devolved government. It exists specifically for sudden, unexpected financial pressure, help with food, energy, or housing costs among them.</p>
         <p style="margin-top:10px">
           <a href="https://www.gov.uk/government/news/new-measures-coming-in-to-ease-cost-of-living-pressure-1-april-2026" target="_blank" rel="noopener">Read the government's own announcement on GOV.UK &rarr;</a><br>
           <a href="https://www.turn2us.org.uk/get-support/information-for-your-situation/crisis-and-resilience-fund/what-is-the-crisis-and-resilience-fund" target="_blank" rel="noopener">Turn2us, find your local scheme and check what applies to you &rarr;</a>
@@ -591,7 +595,7 @@ img { max-width: 100%; display: block; }
 
       <div class="lesson-block">
         <h6>Why it matters</h6>
-        <p>Premium Bonds are issued by NS&amp;I, National Savings and Investments, and are government backed, meaning your capital is protected in full no matter how much you hold, up to the deposit limit. Rather than paying guaranteed interest, your money is entered into a monthly prize draw instead. You might win nothing at all in a given month, or you might win a prize, anywhere from £25 up to £1,000,000, entirely tax free. The "average" return the government quotes is a statistical average spread across everyone holding bonds, not a rate any individual is actually guaranteed to receive, a small holding could go many months winning nothing while remaining completely safe throughout.</p>
+        <p>Premium Bonds are issued by NS&amp;I, National Savings and Investments, and are backed by HM Treasury, meaning 100% of the money held is secure, not restricted to the ordinary bank deposit protection limit that applies elsewhere. Premium Bonds themselves currently have a maximum holding of £50,000 per person, a purchase limit rather than a protection limit. Rather than paying guaranteed interest, your money is entered into a monthly prize draw instead. You might win nothing at all in a given month, or you might win a prize, anywhere from £25 up to £1,000,000, entirely tax free. The "average" return the government quotes is a statistical average spread across everyone holding bonds, not a rate any individual is actually guaranteed to receive, a small holding could go many months winning nothing while remaining completely safe throughout.</p>
       </div>
 
       <div class="lesson-block">
@@ -645,7 +649,7 @@ img { max-width: 100%; display: block; }
 
     <div class="tool-card full" style="margin-bottom:24px;">
       <h4>Money Companion Workbook</h4>
-      <p class="tool-note">A reusable, fillable companion to everything above. Six worksheets to see where your money goes, calculate an emergency fund target, rank your debts, record your ISA thinking, check your workplace pension, and identify your own assets and liabilities. Several fields calculate automatically in Adobe Acrobat or Reader.</p>
+      <p class="tool-note">A reusable, fillable companion to everything above. Six worksheets to see where your money goes, calculate an emergency fund target, rank your debts, record your ISA thinking, check your workplace pension, and identify your own assets and liabilities. Your purchase includes an interactive and printable PDF for Adobe Acrobat Reader, plus a dedicated reMarkable edition with additional handwriting space and linked navigation.</p>
       <p style="font-size:13.5px;color:var(--text-2);margin-bottom:14px;">Pay what you can afford, from £4.99. The Foundations above remain free permanently, this is an optional companion for anyone who wants a structured way to apply them to their own numbers.</p>
       <a href="https://payhip.com/b/zY3TF" class="payhip-buy-button btn btn-terracotta" data-theme="none" data-product="zY3TF">Get the Workbook</a>
     </div>
@@ -655,7 +659,7 @@ img { max-width: 100%; display: block; }
       <div class="tool-card full">
         <h4>Jargon Buster</h4>
         <p class="tool-note">Search any financial term you keep hearing and do not want to keep pretending to understand.</p>
-        <input type="text" class="jb-search" placeholder="Try 'ISA', 'compound interest', or 'diversification'" oninput="filterJargon(this.value)">
+        <input type="text" class="jb-search" aria-label="Search the jargon buster" placeholder="Try 'ISA', 'compound interest', or 'diversification'" oninput="filterJargon(this.value)">
         <dl class="jb-list" id="jargonList">
           <div class="jargon-item visible" data-term="isa"><dt>ISA (Individual Savings Account)</dt><dd>A UK account that lets your savings or investments grow free of income tax and capital gains tax, up to an annual allowance set by HMRC.</dd></div>
           <div class="jargon-item visible" data-term="sipp"><dt>SIPP (Self-Invested Personal Pension)</dt><dd>A personal pension that gives you control over what it invests in, with tax relief added to whatever you contribute.</dd></div>
@@ -677,12 +681,12 @@ img { max-width: 100%; display: block; }
         <h4>Cost of Waiting</h4>
         <p class="tool-note">See what a delay actually costs, in real numbers, not a vague warning.</p>
         <div class="calc-row">
-          <div class="field"><label>Monthly amount (£)</label><input type="number" id="calcMonthly" value="100"></div>
-          <div class="field"><label>Years invested</label><input type="number" id="calcYears" value="10"></div>
+          <div class="field"><label>Monthly amount (£)</label><input type="number" id="calcMonthly" value="100" min="0"></div>
+          <div class="field"><label>Years invested</label><input type="number" id="calcYears" value="10" min="0"></div>
         </div>
         <div class="field" style="margin-bottom:14px"><label>Assumed annual growth (%)</label><input type="number" id="calcRate" value="7" step="0.5"></div>
         <button class="btn btn-primary calc-btn" onclick="runCalc()">Calculate</button>
-        <div class="calc-result" id="calcResult"></div>
+        <div class="calc-result" id="calcResult" aria-live="polite"></div>
         <p class="calc-disclaimer">Illustrative only, based on the figures you enter. Growth is never guaranteed. This is not a forecast or advice.</p>
       </div>
 
@@ -690,12 +694,12 @@ img { max-width: 100%; display: block; }
         <h4>Emergency Fund Target</h4>
         <p class="tool-note">See the target figure for your own situation, and how close you already are.</p>
         <div class="calc-row">
-          <div class="field"><label>Essential outgoings per month (£)</label><input type="number" id="efMonthly" value="1400"></div>
+          <div class="field"><label>Essential outgoings per month (£)</label><input type="number" id="efMonthly" value="1400" min="0"></div>
           <div class="field"><label>Months of cover wanted</label><input type="number" id="efMonths" value="4" min="3" max="6"></div>
         </div>
-        <div class="field" style="margin-bottom:14px"><label>Current emergency savings (£)</label><input type="number" id="efCurrent" value="0"></div>
+        <div class="field" style="margin-bottom:14px"><label>Current emergency savings (£)</label><input type="number" id="efCurrent" value="0" min="0"></div>
         <button class="btn btn-primary calc-btn" onclick="runEmergencyFund()">Calculate</button>
-        <div class="calc-result" id="efResult"></div>
+        <div class="calc-result" id="efResult" aria-live="polite"></div>
         <p class="calc-disclaimer">A commonly used range is three to six months of essential outgoings. Your own right number depends on job security, dependants, and other support available to you.</p>
       </div>
 
@@ -703,16 +707,16 @@ img { max-width: 100%; display: block; }
         <h4>Fee Impact</h4>
         <p class="tool-note">The same investment, growing at the same rate before fees, compared at two different fee levels, over the same number of years.</p>
         <div class="calc-row">
-          <div class="field"><label>Amount invested (£)</label><input type="number" id="feeAmount" value="10000"></div>
-          <div class="field"><label>Years invested</label><input type="number" id="feeYears" value="30"></div>
+          <div class="field"><label>Amount invested (£)</label><input type="number" id="feeAmount" value="10000" min="0"></div>
+          <div class="field"><label>Years invested</label><input type="number" id="feeYears" value="30" min="0"></div>
         </div>
-        <div class="field" style="margin-bottom:14px"><label>Assumed annual growth before fees (%)</label><input type="number" id="feeGrowth" value="7" step="0.5"></div>
+        <div class="field" style="margin-bottom:14px"><label>Assumed annual growth before fees (%)</label><input type="number" id="feeGrowth" value="7" step="0.5" min="0"></div>
         <div class="calc-row">
-          <div class="field"><label>Lower fee, e.g. a low-cost tracker (%)</label><input type="number" id="feeLow" value="0.2" step="0.05"></div>
-          <div class="field"><label>Higher fee, e.g. an actively managed fund (%)</label><input type="number" id="feeHigh" value="1.0" step="0.05"></div>
+          <div class="field"><label>Lower fee, e.g. a low-cost tracker (%)</label><input type="number" id="feeLow" value="0.2" step="0.05" min="0"></div>
+          <div class="field"><label>Higher fee, e.g. an actively managed fund (%)</label><input type="number" id="feeHigh" value="1.0" step="0.05" min="0"></div>
         </div>
         <button class="btn btn-primary calc-btn" onclick="runFeeImpact()">Calculate</button>
-        <div class="calc-result" id="feeResult"></div>
+        <div class="calc-result" id="feeResult" aria-live="polite"></div>
         <p class="calc-disclaimer">Illustrative only. Enter the actual ongoing charges shown on a fund or platform's own factsheet for a genuine comparison, real fees vary by provider and product.</p>
       </div>
 
@@ -720,11 +724,11 @@ img { max-width: 100%; display: block; }
         <h4>Budget to Invest</h4>
         <p class="tool-note">Turn your monthly numbers into the one figure that actually matters, what is left over.</p>
         <div class="calc-row">
-          <div class="field"><label>Take-home pay per month (£)</label><input type="number" id="btiIncome" value="2000"></div>
-          <div class="field"><label>Essential outgoings per month (£)</label><input type="number" id="btiEssentials" value="1400"></div>
+          <div class="field"><label>Take-home pay per month (£)</label><input type="number" id="btiIncome" value="2000" min="0"></div>
+          <div class="field"><label>Essential outgoings per month (£)</label><input type="number" id="btiEssentials" value="1400" min="0"></div>
         </div>
         <button class="btn btn-primary calc-btn" onclick="runBudgetToInvest()">Calculate</button>
-        <div class="calc-result" id="btiResult"></div>
+        <div class="calc-result" id="btiResult" aria-live="polite"></div>
         <p class="calc-disclaimer">A starting point only. Build your emergency fund before directing this figure toward investing.</p>
       </div>
 
@@ -774,7 +778,7 @@ img { max-width: 100%; display: block; }
         </div>
 
         <button class="btn btn-primary calc-btn" style="margin-top:14px" onclick="runRiskQuiz()">See my result</button>
-        <div class="calc-result" id="riskResult"></div>
+        <div class="calc-result" id="riskResult" aria-live="polite"></div>
         <p class="calc-disclaimer">Educational only, a general reflection tool, not a regulated risk assessment. Speak to an FCA authorised adviser before making investment decisions.</p>
       </div>
 
@@ -834,7 +838,7 @@ img { max-width: 100%; display: block; }
         </div>
 
         <button class="btn btn-primary calc-btn" style="margin-top:14px" onclick="runMoneyQuiz()">See my result</button>
-        <div class="calc-result" id="moneyResult"></div>
+        <div class="calc-result" id="moneyResult" aria-live="polite"></div>
         <p class="calc-disclaimer">A reflection tool, not a diagnosis. It simply names a pattern many people recognise in themselves, so you can do something about it rather than just feel it.</p>
 
         <div id="moneyEmailCapture" style="display:none; margin-top:18px; padding:18px 20px; background:var(--ivory); border-radius:10px; border:1px solid var(--line);">
@@ -848,7 +852,7 @@ img { max-width: 100%; display: block; }
             </div>
             <label style="display:flex; align-items:flex-start; gap:8px; margin-top:14px; font-size:13px; color:var(--text-2); cursor:pointer;">
               <input type="checkbox" name="marketing_consent" value="Yes, send occasional updates" style="margin-top:3px;">
-              <span>Yes, also email me occasional Academy learning updates and programme news. <a href="unsubscribe.html" target="_blank" style="color:inherit; text-decoration:underline;">Unsubscribe</a> at any time, one click, no email needed.</span>
+              <span>Yes, also email me occasional Academy learning updates and programme news. You can unsubscribe at any time using the link in an Academy email or through our <a href="unsubscribe.html" target="_blank" style="color:inherit; text-decoration:underline;">unsubscribe page</a>.</span>
             </label>
             <p style="font-size:12px; color:var(--text-3); margin-top:8px;">Leaving this unticked means your email is used only to send the result you asked for above, nothing else.</p>
           </form>
@@ -860,7 +864,7 @@ img { max-width: 100%; display: block; }
       <div class="tool-card">
         <h4>Scam Checker</h4>
         <p class="tool-note">Answer honestly about an opportunity you have been offered, and see how it scores.</p>
-        <div class="field" style="margin-bottom:12px"><label>Promised annual return (%)</label><input type="number" id="scamReturn" value="0"></div>
+        <div class="field" style="margin-bottom:12px"><label>Promised annual return (%)</label><input type="number" id="scamReturn" value="0" min="0"></div>
         <div class="calc-row">
           <div class="field"><label>Involves cryptocurrency?</label><input type="text" id="scamCrypto" placeholder="yes / no" value="no"></div>
           <div class="field"><label>FCA registered?</label><input type="text" id="scamFCA" placeholder="yes / no / unknown" value="unknown"></div>
@@ -870,7 +874,7 @@ img { max-width: 100%; display: block; }
           <div class="field"><label>Pressure to decide fast?</label><input type="text" id="scamPressure" placeholder="yes / no" value="no"></div>
         </div>
         <button class="btn btn-primary calc-btn" onclick="runScamCheck()">Check it</button>
-        <div class="calc-result" id="scamResult"></div>
+        <div class="calc-result" id="scamResult" aria-live="polite"></div>
       </div>
 
       <div class="tool-card full">
@@ -900,7 +904,7 @@ img { max-width: 100%; display: block; }
             <ul>
               <li>Returns come from real company profits and economic growth, not recruitment</li>
               <li>Global stock markets have averaged roughly 8 to 10 percent a year over decades</li>
-              <li>FCA regulated, with legal protection and recourse if things go wrong</li>
+              <li>Use a firm authorised by the FCA for the service you need. Financial Ombudsman Service and FSCS protection may apply, depending on the firm, product, activity and circumstances. They do not protect you from ordinary investment losses. Authorisation reduces risk but does not guarantee safety, performance or compensation.</li>
               <li>You can start with what you can afford, even a small monthly amount</li>
               <li>A Stocks and Shares ISA grows free of tax and stays accessible within days</li>
               <li>Long term investors who stayed through every crash since 1929 have recovered and grown</li>
@@ -909,7 +913,7 @@ img { max-width: 100%; display: block; }
         </div>
 
         <div class="math-strip">
-          <div class="math-block"><div class="mb-num">474%</div><div class="mb-label">a year is what a 1.3% daily scheme actually promises. No legitimate investment on earth delivers this.</div></div>
+          <div class="math-block"><div class="mb-num">474.5%</div><div class="mb-label">a year is what 1.3% every day works out to before compounding, and compounding would make the real figure far higher still. No legitimate investment on earth delivers this.</div></div>
           <div class="math-block"><div class="mb-num">7&ndash;10%</div><div class="mb-label">a year is roughly the historical average for global stock markets, never guaranteed in any single year.</div></div>
           <div class="math-block"><div class="mb-num">10&ndash;12%</div><div class="mb-label">a year is what Bernie Madoff promised. It became the largest financial fraud in history.</div></div>
         </div>
@@ -950,9 +954,9 @@ img { max-width: 100%; display: block; }
 
         <div class="resource-list">
           <a class="resource-chip" href="https://www.moneyhelper.org.uk" target="_blank" rel="noopener">MoneyHelper, free and government backed</a>
-          <a class="resource-chip" href="https://www.fca.org.uk/scamsmart" target="_blank" rel="noopener">FCA ScamSmart</a>
+          <a class="resource-chip" href="https://www.fca.org.uk/consumers/protect-yourself-scams" target="_blank" rel="noopener">FCA — Protect yourself from scams</a>
         </div>
-        <p class="calc-disclaimer" style="margin-top:14px">Shared as a friend, not as a financial adviser. Always seek regulated advice before investing. Report suspected scams to Action Fraud on 0300 123 2040.</p>
+        <p class="calc-disclaimer" style="margin-top:14px">Shared as a friend, not as a financial adviser. Always seek regulated advice before investing. If you have lost money or believe you have been targeted by fraud, contact Report Fraud on 0300 123 2040 or visit reportfraud.police.uk.</p>
       </div>
 
     </div>
@@ -979,7 +983,7 @@ img { max-width: 100%; display: block; }
           <a href="about.html">About</a>
           <a href="privacy.html">Privacy Policy</a>
           <a href="terms.html">Terms</a>
-          <a href="https://www.fca.org.uk/scamsmart" target="_blank" rel="noopener">FCA ScamSmart</a>
+          <a href="https://www.fca.org.uk/consumers/protect-yourself-scams" target="_blank" rel="noopener">FCA — Protect yourself from scams</a>
         </div>
       </div>
     </div>
@@ -991,6 +995,12 @@ img { max-width: 100%; display: block; }
 </footer>
 
 <script>
+function toggleMobileNav() {
+  const nav = document.getElementById('mainNavLinks');
+  const btn = document.querySelector('.nav-toggle');
+  const isOpen = nav.classList.toggle('mobile-open');
+  btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
 function filterJargon(query) {
   const q = query.toLowerCase().trim();
   document.querySelectorAll('.jargon-item').forEach(item => {
@@ -1008,7 +1018,7 @@ function runCalc() {
   const months  = years * 12;
 
   const invested = monthly * months;
-  const futureValue = monthlyRate > 0
+  const futureValue = monthlyRate !== 0
     ? monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate)
     : invested;
   const growth = futureValue - invested;
@@ -1148,13 +1158,20 @@ function runMoneyQuiz() {
       desc: 'Doing the right things without feeling the reward yet. This is often the hardest pattern to sit with, since you are already doing much of what should work. Progress in personal finance compounds quietly and is often invisible week to week, the evidence is usually there if you look back further than you have been looking.' },
   };
 
-  let topKey = 'avoidance';
-  Object.keys(tally).forEach(key => { if (tally[key] > tally[topKey]) topKey = key; });
+  const maxTally = Math.max(...Object.values(tally));
+  const topKeys = Object.keys(tally).filter(key => tally[key] === maxTally);
+  const topKey = topKeys[0];
   const result = patterns[topKey];
+  const isTie = topKeys.length > 1;
+
+  const tieNote = isTie
+    ? `<p class="calc-disclaimer" style="margin-top:8px">Your answers were evenly split between ${topKeys.map(k => patterns[k].label).join(' and ')}. ${result.label} is shown here, but the other pattern may describe you just as well.</p>`
+    : '';
 
   el.innerHTML =
     `<div class="calc-result-row"><span class="calc-result-label">A possible pattern</span><span class="calc-result-value" style="color:${result.ink}">${result.label}</span></div>` +
-    `<p class="calc-disclaimer" style="margin-top:12px">${result.desc}</p>`;
+    `<p class="calc-disclaimer" style="margin-top:12px">${result.desc}</p>` +
+    tieNote;
 
   document.getElementById('moneyPatternHidden').value = result.label;
   document.getElementById('moneyEmailCapture').style.display = 'block';
@@ -1209,17 +1226,17 @@ function runScamCheck() {
   else if (ret > 10) { score += 10; flags.push('A promised return above 10% a year is worth investigating carefully.'); }
 
   if (crypto === 'yes') { score += 25; flags.push('Cryptocurrency payments are hard to trace and are not protected by the Financial Services Compensation Scheme.'); }
-  if (fca === 'no') { score += 30; flags.push('Not FCA registered. Offering financial investments in the UK without FCA registration is against the law.'); }
+  if (fca === 'no') { score += 30; flags.push('The firm may be operating without the authorisation or permissions required for the activity. Do not proceed until you have checked it using the FCA Firm Checker.'); }
   if (fca === 'unknown') { score += 15; flags.push('FCA status unknown. Check the firm at register.fca.org.uk before you go any further, it takes under a minute.'); }
-  if (recruit === 'yes') { score += 35; flags.push('Earnings that depend on recruiting others is the definition of a pyramid scheme, which is illegal in the UK.'); }
+  if (recruit === 'yes') { score += 35; flags.push('Heavy reliance on recruitment payments, particularly where there is no genuine product or sustainable source of returns, is a serious pyramid-scheme warning sign.'); }
   if (pressure === 'yes') { score += 20; flags.push('Pressure to decide quickly is a common manipulation tactic. A genuine opportunity will still be there tomorrow.'); }
 
   score = Math.min(score, 100);
 
   let label, advice, tint, ink;
-  if (score >= 60) { label = 'High Risk'; advice = 'Several serious warning signs are present here. Do not proceed. Check the firm at fca.org.uk/scamsmart and speak to an FCA authorised financial adviser before making any decision.'; tint = '#F7EDE9'; ink = '#8B3A2B'; }
-  else if (score >= 30) { label = 'Medium Risk'; advice = 'Some warning signs are present. Verify FCA registration and speak to an FCA authorised financial adviser before proceeding.'; tint = '#FBF0E9'; ink = 'var(--terracotta-deep)'; }
-  else { label = 'Fewer Warning Signs'; advice = 'Fewer warning signs detected, this does not confirm the opportunity is legitimate or suitable. Still verify FCA registration and permissions directly, and seek independent regulated advice before investing any money.'; tint = '#EEF1EA'; ink = 'var(--sage-deep)'; }
+  if (score >= 60) { label = 'Serious Warning Signs Detected'; advice = 'Several serious warning signs are present here. Do not proceed. Check the firm using the FCA Firm Checker and speak to an FCA authorised financial adviser before making any decision.'; tint = '#F7EDE9'; ink = '#8B3A2B'; }
+  else if (score >= 30) { label = 'Some Warning Signs Detected'; advice = 'Some warning signs are present. Verify FCA registration and speak to an FCA authorised financial adviser before proceeding.'; tint = '#FBF0E9'; ink = 'var(--terracotta-deep)'; }
+  else { label = 'No Obvious Warning Signs Detected'; advice = 'No obvious warning signs detected, this does not establish legitimacy. Still verify FCA registration and permissions directly, and seek independent regulated advice before investing any money.'; tint = '#EEF1EA'; ink = 'var(--sage-deep)'; }
 
   const flagHtml = flags.map(f => `<div style="font-size:12.5px;color:var(--text-2);padding:7px 0;border-bottom:1px solid var(--line)">${f}</div>`).join('');
 
@@ -1227,7 +1244,7 @@ function runScamCheck() {
   el.style.display = 'block';
   el.style.background = tint;
   el.innerHTML =
-    `<div class="calc-result-row"><span class="calc-result-label">Score</span><span class="calc-result-value" style="color:${ink}">${score} / 100 — ${label}</span></div>` +
+    `<div class="calc-result-row"><span class="calc-result-label">Result</span><span class="calc-result-value" style="color:${ink}">${label}</span></div>` +
     (flags.length ? `<div style="margin-top:12px">${flagHtml}</div>` : '') +
     `<p class="calc-disclaimer" style="margin-top:12px">${advice} This tool is educational only and is not a substitute for regulated financial advice.</p>`;
 }
