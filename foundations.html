@@ -319,7 +319,7 @@ img { max-width: 100%; display: block; }
         <p>Understanding money. Building what matters.</p>
       </div>
     </a>
-    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav()">&#9776;</button>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainNavLinks" onclick="toggleMobileNav()">&#9776;</button>
     <nav class="nav-links" id="mainNavLinks">
       <a href="#free">Free Resources</a>
       <a href="index.html#tiers">Learning Path</a>
@@ -668,7 +668,7 @@ img { max-width: 100%; display: block; }
           <div class="jargon-item visible" data-term="diversification"><dt>Diversification</dt><dd>Spreading money across different investments so that a loss in one area does not sink the whole plan.</dd></div>
           <div class="jargon-item visible" data-term="dividend yield"><dt>Dividend Yield</dt><dd>The yearly dividend payment shown as a percentage of the share price, one way of comparing income across investments.</dd></div>
           <div class="jargon-item visible" data-term="risk tolerance"><dt>Risk Tolerance</dt><dd>How much loss in value you can accept without changing your plan out of fear, different for every person and every stage of life.</dd></div>
-          <div class="jargon-item visible" data-term="fca financial conduct authority"><dt>FCA (Financial Conduct Authority)</dt><dd>The UK regulator for financial firms. A legitimate investment firm operating in the UK is FCA registered, checkable at register.fca.org.uk.</dd></div>
+          <div class="jargon-item visible" data-term="fca financial conduct authority"><dt>FCA (Financial Conduct Authority)</dt><dd>The UK regulator for financial firms. A legitimate investment firm operating in the UK is authorised or registered, with permission for the relevant service, checkable using the FCA Firm Checker.</dd></div>
           <div class="jargon-item visible" data-term="capital gains tax cgt"><dt>Capital Gains Tax</dt><dd>Tax owed on the profit made when you sell an asset that has increased in value, above your annual tax-free allowance.</dd></div>
           <div class="jargon-item visible" data-term="asset"><dt>Asset</dt><dd>Something you own that has financial value. Some assets may also produce income or increase in value, a Stocks and Shares ISA, a pension, or property that earns rent are common examples.</dd></div>
           <div class="jargon-item visible" data-term="liability"><dt>Liability</dt><dd>Money you owe or a financial obligation you must repay, whether you use it or not, a credit card balance carrying interest is a common example.</dd></div>
@@ -682,10 +682,10 @@ img { max-width: 100%; display: block; }
         <h4>Cost of Waiting</h4>
         <p class="tool-note">See what a delay actually costs, in real numbers, not a vague warning.</p>
         <div class="calc-row">
-          <div class="field"><label>Monthly amount (£)</label><input type="number" id="calcMonthly" value="100" min="0"></div>
-          <div class="field"><label>Years invested</label><input type="number" id="calcYears" value="10" min="0"></div>
+          <div class="field"><label for="calcMonthly">Monthly amount (£)</label><input type="number" id="calcMonthly" value="100" min="0"></div>
+          <div class="field"><label for="calcYears">Years invested</label><input type="number" id="calcYears" value="10" min="0"></div>
         </div>
-        <div class="field" style="margin-bottom:14px"><label>Assumed annual growth (%)</label><input type="number" id="calcRate" value="7" step="0.5"></div>
+        <div class="field" style="margin-bottom:14px"><label for="calcRate">Assumed annual growth (%)</label><input type="number" id="calcRate" value="7" step="0.5"></div>
         <button class="btn btn-primary calc-btn" onclick="runCalc()">Calculate</button>
         <div class="calc-result" id="calcResult" aria-live="polite"></div>
         <p class="calc-disclaimer">Illustrative only, based on the figures you enter. Growth is never guaranteed. This is not a forecast or advice.</p>
@@ -695,10 +695,10 @@ img { max-width: 100%; display: block; }
         <h4>Emergency Fund Target</h4>
         <p class="tool-note">See the target figure for your own situation, and how close you already are.</p>
         <div class="calc-row">
-          <div class="field"><label>Essential outgoings per month (£)</label><input type="number" id="efMonthly" value="1400" min="0"></div>
-          <div class="field"><label>Months of cover wanted</label><input type="number" id="efMonths" value="4" min="3" max="6"></div>
+          <div class="field"><label for="efMonthly">Essential outgoings per month (£)</label><input type="number" id="efMonthly" value="1400" min="0"></div>
+          <div class="field"><label for="efMonths">Months of cover wanted</label><input type="number" id="efMonths" value="4" min="3" max="6"></div>
         </div>
-        <div class="field" style="margin-bottom:14px"><label>Current emergency savings (£)</label><input type="number" id="efCurrent" value="0" min="0"></div>
+        <div class="field" style="margin-bottom:14px"><label for="efCurrent">Current emergency savings (£)</label><input type="number" id="efCurrent" value="0" min="0"></div>
         <button class="btn btn-primary calc-btn" onclick="runEmergencyFund()">Calculate</button>
         <div class="calc-result" id="efResult" aria-live="polite"></div>
         <p class="calc-disclaimer">A commonly used range is three to six months of essential outgoings. Your own right number depends on job security, dependants, and other support available to you.</p>
@@ -708,13 +708,13 @@ img { max-width: 100%; display: block; }
         <h4>Fee Impact</h4>
         <p class="tool-note">The same investment, growing at the same rate before fees, compared at two different fee levels, over the same number of years.</p>
         <div class="calc-row">
-          <div class="field"><label>Amount invested (£)</label><input type="number" id="feeAmount" value="10000" min="0"></div>
-          <div class="field"><label>Years invested</label><input type="number" id="feeYears" value="30" min="0"></div>
+          <div class="field"><label for="feeAmount">Amount invested (£)</label><input type="number" id="feeAmount" value="10000" min="0"></div>
+          <div class="field"><label for="feeYears">Years invested</label><input type="number" id="feeYears" value="30" min="0"></div>
         </div>
-        <div class="field" style="margin-bottom:14px"><label>Assumed annual growth before fees (%)</label><input type="number" id="feeGrowth" value="7" step="0.5" min="0"></div>
+        <div class="field" style="margin-bottom:14px"><label for="feeGrowth">Assumed annual growth before fees (%)</label><input type="number" id="feeGrowth" value="7" step="0.5" min="0"></div>
         <div class="calc-row">
-          <div class="field"><label>Lower fee, e.g. a low-cost tracker (%)</label><input type="number" id="feeLow" value="0.2" step="0.05" min="0"></div>
-          <div class="field"><label>Higher fee, e.g. an actively managed fund (%)</label><input type="number" id="feeHigh" value="1.0" step="0.05" min="0"></div>
+          <div class="field"><label for="feeLow">Lower fee, e.g. a low-cost tracker (%)</label><input type="number" id="feeLow" value="0.2" step="0.05" min="0"></div>
+          <div class="field"><label for="feeHigh">Higher fee, e.g. an actively managed fund (%)</label><input type="number" id="feeHigh" value="1.0" step="0.05" min="0"></div>
         </div>
         <button class="btn btn-primary calc-btn" onclick="runFeeImpact()">Calculate</button>
         <div class="calc-result" id="feeResult" aria-live="polite"></div>
@@ -725,8 +725,8 @@ img { max-width: 100%; display: block; }
         <h4>Budget to Invest</h4>
         <p class="tool-note">Turn your monthly numbers into the one figure that actually matters, what is left over.</p>
         <div class="calc-row">
-          <div class="field"><label>Take-home pay per month (£)</label><input type="number" id="btiIncome" value="2000" min="0"></div>
-          <div class="field"><label>Essential outgoings per month (£)</label><input type="number" id="btiEssentials" value="1400" min="0"></div>
+          <div class="field"><label for="btiIncome">Take-home pay per month (£)</label><input type="number" id="btiIncome" value="2000" min="0"></div>
+          <div class="field"><label for="btiEssentials">Essential outgoings per month (£)</label><input type="number" id="btiEssentials" value="1400" min="0"></div>
         </div>
         <button class="btn btn-primary calc-btn" onclick="runBudgetToInvest()">Calculate</button>
         <div class="calc-result" id="btiResult" aria-live="polite"></div>
@@ -847,7 +847,7 @@ img { max-width: 100%; display: block; }
           <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:12px;">Enter your email and Samuel will personally send you your result, along with a suggested educational starting point based only on your quiz answers, not a personal financial recommendation, usually within a day or two.</p>
           <form id="money-email-form" action="https://formspree.io/f/xrenozvj" method="POST" onsubmit="submitMoneyEmailForm(event)">
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
-              <input type="email" id="money-email-input" name="email" required placeholder="you@example.com" style="flex:1; min-width:200px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:14px; font-family:var(--mono); background:var(--paper);">
+              <input type="email" id="money-email-input" name="email" required aria-label="Your email address" placeholder="you@example.com" style="flex:1; min-width:200px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:14px; font-family:var(--mono); background:var(--paper);">
               <input type="hidden" name="money_pattern" id="moneyPatternHidden" value="">
               <button type="submit" id="money-email-submit-btn" class="btn btn-primary">Send my result</button>
             </div>
@@ -864,15 +864,15 @@ img { max-width: 100%; display: block; }
 
       <div class="tool-card">
         <h4>Scam Checker</h4>
-        <p class="tool-note">Answer honestly about an opportunity you have been offered, and see how it scores.</p>
-        <div class="field" style="margin-bottom:12px"><label>Promised annual return (%)</label><input type="number" id="scamReturn" value="0" min="0"></div>
+        <p class="tool-note">Answer honestly about an opportunity you have been offered and identify any warning signs that deserve further checking.</p>
+        <div class="field" style="margin-bottom:12px"><label for="scamReturn">Promised annual return (%)</label><input type="number" id="scamReturn" value="0" min="0"></div>
         <div class="calc-row">
-          <div class="field"><label>Involves cryptocurrency?</label><input type="text" id="scamCrypto" placeholder="yes / no" value="no"></div>
-          <div class="field"><label>FCA registered?</label><input type="text" id="scamFCA" placeholder="yes / no / unknown" value="unknown"></div>
+          <div class="field"><label for="scamCrypto">Involves cryptocurrency?</label><input type="text" id="scamCrypto" placeholder="yes / no" value="no"></div>
+          <div class="field"><label for="scamFCA">Authorised or registered with the FCA?</label><input type="text" id="scamFCA" placeholder="yes / no / unknown" value="unknown"></div>
         </div>
         <div class="calc-row">
-          <div class="field"><label>Pays you to recruit others?</label><input type="text" id="scamRecruit" placeholder="yes / no" value="no"></div>
-          <div class="field"><label>Pressure to decide fast?</label><input type="text" id="scamPressure" placeholder="yes / no" value="no"></div>
+          <div class="field"><label for="scamRecruit">Pays you to recruit others?</label><input type="text" id="scamRecruit" placeholder="yes / no" value="no"></div>
+          <div class="field"><label for="scamPressure">Pressure to decide fast?</label><input type="text" id="scamPressure" placeholder="yes / no" value="no"></div>
         </div>
         <button class="btn btn-primary calc-btn" onclick="runScamCheck()">Check it</button>
         <div class="calc-result" id="scamResult" aria-live="polite"></div>
@@ -896,7 +896,7 @@ img { max-width: 100%; display: block; }
               <li>Promises returns far above anything a genuine investment could deliver</li>
               <li>Payments requested in cryptocurrency, hard to trace and outside UK protection</li>
               <li>Asks you to borrow money in order to join</li>
-              <li>Not registered with the FCA</li>
+              <li>Not authorised or registered with the FCA</li>
               <li>The structure depends on recruitment continuing forever, and always collapses</li>
             </ul>
           </div>
@@ -907,8 +907,8 @@ img { max-width: 100%; display: block; }
               <li>Global stock markets have averaged roughly 8 to 10 percent a year over decades</li>
               <li>Use a firm authorised by the FCA for the service you need. Financial Ombudsman Service and FSCS protection may apply, depending on the firm, product, activity and circumstances. They do not protect you from ordinary investment losses. Authorisation reduces risk but does not guarantee safety, performance or compensation.</li>
               <li>You can start with what you can afford, even a small monthly amount</li>
-              <li>A Stocks and Shares ISA grows free of tax and stays accessible within days</li>
-              <li>Long term investors who stayed through every crash since 1929 have recovered and grown</li>
+              <li>Growth and income within a Stocks and Shares ISA are generally tax-free. Withdrawal times depend on the investments, provider and settlement process.</li>
+              <li>Diversified stock markets have historically recovered from major falls over time, but recovery periods vary and no individual investment or future recovery is guaranteed.</li>
             </ul>
           </div>
         </div>
@@ -920,7 +920,7 @@ img { max-width: 100%; display: block; }
         </div>
 
         <ol class="question-list">
-          <li>Is it registered with the FCA? Check at register.fca.org.uk</li>
+          <li>Is it authorised or registered with the FCA, with permission for this service? Check using the FCA Firm Checker</li>
           <li>Where exactly do the returns come from? Recruiting others is not a legitimate answer.</li>
           <li>Can you withdraw your money at any time without penalty?</li>
           <li>Are the promised returns independently audited and verified?</li>
@@ -947,7 +947,7 @@ img { max-width: 100%; display: block; }
             <li>Annual platform fee, and whether it is a flat charge or a percentage of your money</li>
             <li>Fund and account range, ISAs, pensions, or general investing, whichever you actually need</li>
             <li>Minimum investment amount, some accept £25 a month, others expect a lump sum to start</li>
-            <li>FCA registered, checkable at register.fca.org.uk before you open anything</li>
+            <li>Authorised or registered with the FCA, with permission for the relevant service, checkable using the FCA Firm Checker before you open anything</li>
             <li>How straightforward it is to withdraw your own money when you want it</li>
           </ul>
         </div>
@@ -1230,7 +1230,7 @@ function runScamCheck() {
   if (fca === 'no') { score += 30; flags.push('The firm may be operating without the authorisation or permissions required for the activity. Do not proceed until you have checked it using the FCA Firm Checker.'); }
   if (fca === 'unknown') { score += 15; flags.push('FCA status unknown. Check the firm at register.fca.org.uk before you go any further, it takes under a minute.'); }
   if (recruit === 'yes') { score += 35; flags.push('Heavy reliance on recruitment payments, particularly where there is no genuine product or sustainable source of returns, is a serious pyramid-scheme warning sign.'); }
-  if (pressure === 'yes') { score += 20; flags.push('Pressure to decide quickly is a common manipulation tactic. A genuine opportunity will still be there tomorrow.'); }
+  if (pressure === 'yes') { score += 20; flags.push('High-pressure urgency is a warning sign. A genuine firm should allow reasonable time to check the details independently.'); }
 
   score = Math.min(score, 100);
 
