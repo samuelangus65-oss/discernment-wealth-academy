@@ -92,6 +92,7 @@ img { max-width: 100%; display: block; }
 @media (min-width: 860px) { .nav-links { display: flex; } }
 .nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; padding: 4px 8px; }
 @media (max-width: 859px) { .nav-toggle { display: block; } }
+@media (max-width: 480px) { #cc-return-banner { padding: 6px 12px; } #cc-return-banner a { font-size: 12.5px; } #cc-return-banner div { font-size: 10.5px; } }
 .nav-links.mobile-open { display: flex; flex-direction: column; gap: 16px; position: absolute; top: 100%; left: 0; right: 0; background: var(--wine); padding: 16px 24px; z-index: 20; }
 
 /* ============ FCA STRIP ============ */
@@ -331,6 +332,11 @@ img { max-width: 100%; display: block; }
 
 <div class="fca-strip">
   <strong>Education only.</strong> Discernment Wealth Academy provides general financial education and information. Nothing here is personalised financial advice.
+</div>
+
+<div id="cc-return-banner" style="display:none;position:sticky;top:0;z-index:50;background:var(--brass);text-align:center;padding:9px 16px;">
+  <a href="foundations-command-centre.html" style="color:var(--wine);font-weight:600;font-size:14px;text-decoration:none;">&larr; Return to Foundations Command Centre</a>
+  <div style="font-size:11.5px;color:var(--wine-2);margin-top:1px;">You are viewing a tool from the classic Foundations page.</div>
 </div>
 
 <header class="site-header" style="position:relative;">
@@ -678,6 +684,7 @@ img { max-width: 100%; display: block; }
       <p class="tool-note">A reusable, fillable companion to everything above. Six worksheets to see where your money goes, calculate an emergency fund target, rank your debts, record your ISA thinking, check your workplace pension, and identify your own assets and liabilities. Your purchase includes two versions, the Interactive and Print Edition for Adobe Acrobat Reader or printing, and the reMarkable Handwriting Edition, with additional writing space and linked navigation for reMarkable and similar e-ink tablets.</p>
       <p style="font-size:13.5px;color:var(--text-2);margin-bottom:14px;">Pay what you can afford, from £4.99. The Foundations above remain free permanently, this is an optional companion for anyone who wants a structured way to apply them to their own numbers.</p>
       <a href="https://payhip.com/b/zY3TF" class="btn btn-terracotta" target="_blank" rel="noopener">Get the Workbook</a>
+      <p style="font-size:13px;margin-top:10px;"><a href="foundations-command-centre.html">Not ready for the workbook? Continue with Foundations &rarr;</a></p>
     </div>
 
     <div class="tool-grid">
@@ -1400,6 +1407,19 @@ function runScamCheck() {
       }, 100);
     });
   }
+
+  // Show the sticky return-to-Command-Centre banner only for members who genuinely
+  // arrived from there, either directly (referrer) or via one of the deep links the
+  // Command Centre itself opens (matching hash), not for an ordinary visitor to this page.
+  (function () {
+    const deepLinkAnchors = ['money-companion-workbook', 'jargon-buster', 'risk-tolerance-quiz', 'money-quiz', 'scam-checker'];
+    const cameFromCommandCentre = document.referrer.indexOf('foundations-command-centre.html') !== -1;
+    const hashMatchesDeepLink = window.location.hash && deepLinkAnchors.indexOf(window.location.hash.slice(1)) !== -1;
+    if (cameFromCommandCentre || hashMatchesDeepLink) {
+      const banner = document.getElementById('cc-return-banner');
+      if (banner) banner.style.display = 'block';
+    }
+  })();
 </script>
 </body>
 </html>
