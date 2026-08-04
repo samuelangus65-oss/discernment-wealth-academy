@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Foundations Command Centre — Discernment Wealth Academy</title>
+<meta name="description" content="Your free Foundations learning journey, six phases, eight topics, worked through at your own pace. Discernment Wealth Academy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --wine:        #2B1620;
+  --wine-2:      #3D2233;
+  --plum:       #5B4B7A;
+  --brass:       #B08D57;
+  --brass-deep:  #8C6B3F;
+  --ivory:  #F2E9DC;
+  --paper:      #FBF7F0;
+  --line:       #E3D6C3;
+  --text:       #231A1D;
+  --text-2:     #5C4F52;
+  --text-3:     #8F8083;
+  --sage:       #A8B59E;
+  --sage-deep:  #6F8064;
+  --terracotta: #C97A5E;
+  --terracotta-deep: #A65A40;
+  --radius:     14px;
+  --shadow:     0 2px 16px rgba(43,22,32,0.08);
+  --shadow-lg:  0 12px 40px rgba(43,22,32,0.16);
+  --serif: 'Fraunces', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  --mono:  'IBM Plex Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); color: var(--text); background: var(--paper); line-height: 1.5; }
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+a { color: inherit; }
+
+/* Header */
+.site-header { background: var(--wine); padding: 18px 0; position: relative; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+.brand-mark { width: 42px; height: 42px; flex-shrink: 0; }
+.brand-text h1 { font-family: var(--serif); font-size: 18px; font-weight: 600; color: #fff; }
+.brand-text p { font-size: 11.5px; color: rgba(242,233,220,0.65); margin-top: 1px; }
+.nav-links { display: none; align-items: center; gap: 22px; font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.72); }
+.nav-links a { text-decoration: none; }
+.nav-links a:hover { color: #fff; }
+.nav-links button.jargon-nav-btn {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); color: #fff;
+  border-radius: 20px; padding: 7px 14px; font-size: 13px; font-family: var(--sans); cursor: pointer;
+}
+.nav-links button.jargon-nav-btn:hover { background: rgba(255,255,255,0.18); }
+@media (min-width: 860px) { .nav-links { display: flex; } }
+.nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; padding: 4px 8px; }
+@media (max-width: 859px) { .nav-toggle { display: block; } }
+.nav-links.mobile-open { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; position: absolute; top: 100%; left: 0; right: 0; background: var(--wine); padding: 16px 24px; z-index: 20; }
+
+/* Command centre intro */
+.cc-intro { padding: 28px 0 18px; text-align: center; }
+.cc-intro h2 { font-family: var(--serif); font-size: 30px; font-weight: 600; color: var(--wine); margin-bottom: 10px; }
+.cc-intro p { font-size: 15px; color: var(--text-2); max-width: 560px; margin: 0 auto; }
+
+/* Standalone resources row, near the top now */
+.resource-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; padding: 0 0 20px; }
+.resource-chip {
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 30px;
+  background: #fff; border: 1px solid var(--line); font-size: 13.5px; color: var(--wine); font-weight: 500;
+  text-decoration: none; cursor: pointer;
+}
+.resource-chip:hover { border-color: var(--brass); }
+.resource-chip.pending { color: var(--text-3); }
+
+/* Compass phase path, the signature element */
+.phase-path { padding: 4px 0 24px; }
+.phase-path-track { display: flex; align-items: flex-start; justify-content: space-between; max-width: 760px; margin: 0 auto; position: relative; padding: 0 10px; }
+.phase-path-track::before {
+  content: ''; position: absolute; top: 15px; left: 40px; right: 40px; height: 2px;
+  background: var(--line); z-index: 0;
+}
+.phase-point { display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; z-index: 1; flex: 1; }
+.phase-dot {
+  width: 30px; height: 30px; border-radius: 50%; background: var(--paper); border: 2px solid var(--line);
+  display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--text-3);
+  transition: all 0.2s ease;
+}
+.phase-point.reached .phase-dot { background: var(--brass); border-color: var(--brass); color: #fff; }
+.phase-point.current .phase-dot { background: var(--wine); border-color: var(--wine); color: #fff; box-shadow: 0 0 0 4px rgba(43,22,32,0.12); }
+.phase-label { font-size: 11px; font-weight: 600; color: var(--text-3); text-align: center; letter-spacing: 0.02em; }
+.phase-point.reached .phase-label, .phase-point.current .phase-label { color: var(--wine); }
+@media (prefers-reduced-motion: reduce) { .phase-dot { transition: none; } }
+@media (max-width: 640px) { .phase-label { display: none; } }
+.phase-path-mobile-line { display: none; text-align: center; font-family: var(--mono); font-size: 12.5px; color: var(--wine); font-weight: 600; margin-top: 4px; }
+@media (max-width: 640px) { .phase-path-mobile-line { display: block; } }
+
+/* Phase sections */
+.phase-section { padding: 16px 0; border-top: 1px solid var(--line); }
+.phase-section:first-of-type { border-top: none; padding-top: 4px; }
+.phase-heading { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+.phase-heading .phase-num { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--brass-deep); }
+.phase-heading h3 { font-family: var(--serif); font-size: 19px; font-weight: 600; color: var(--wine); }
+
+.card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (max-width: 700px) { .card-grid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .c6-calc-grid { grid-template-columns: 1fr !important; } }
+
+.topic-card {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px;
+  box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 6px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+@media (prefers-reduced-motion: reduce) { .topic-card { transition: none; } }
+.topic-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .topic-card:hover { transform: none; } }
+.topic-card-top { display: flex; align-items: center; justify-content: space-between; }
+.topic-icon { width: 30px; height: 30px; border-radius: 8px; background: var(--ivory); display: flex; align-items: center; justify-content: center; font-size: 15px; }
+.status-badge { font-family: var(--mono); font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; letter-spacing: 0.02em; }
+.status-badge.not-started { background: var(--ivory); color: var(--text-3); }
+.status-badge.in-progress { background: #FBF0E9; color: var(--terracotta-deep); }
+.status-badge.completed { background: #E9F1EA; color: var(--sage-deep); }
+.topic-card h4 { font-family: var(--serif); font-size: 16.5px; font-weight: 600; color: var(--wine); line-height: 1.28; }
+.topic-card .outcome { font-size: 13.5px; color: var(--text-2); line-height: 1.4; }
+.topic-card .first-step { font-size: 12.5px; color: var(--brass-deep); font-weight: 600; }
+.topic-card-meta { display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; color: var(--text-3); }
+.topic-card .btn-start {
+  margin-top: 4px; padding: 9px 15px; border-radius: 8px; border: none; cursor: pointer;
+  font-family: var(--sans); font-size: 13.5px; font-weight: 600; background: var(--wine); color: #fff;
+  text-align: center;
+}
+.topic-card .btn-start:hover { background: var(--wine-2); }
+.topic-card.sub-dashboard .btn-start { background: var(--brass-deep); }
+.topic-card.sub-dashboard .btn-start:hover { background: var(--brass); }
+.sub-count { font-family: var(--mono); font-size: 10.5px; color: var(--brass-deep); }
+
+.lesson-article { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px 28px; margin-bottom: 24px; }
+.lesson-article h3 { font-family: var(--serif); font-size: 24px; color: var(--wine); margin-bottom: 20px; }
+.lesson-block { margin-bottom: 20px; }
+.lesson-block h6 { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--brass-deep); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+.lesson-block p { font-size: 14.5px; color: var(--text-2); line-height: 1.6; margin-bottom: 10px; }
+.lesson-block ul { margin: 8px 0 8px 20px; }
+.lesson-block li { font-size: 14.5px; color: var(--text-2); line-height: 1.6; margin-bottom: 4px; }
+
+/* Lesson placeholder view and sub-dashboard view */
+.view { display: none; }
+.view.active { display: block; }
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--brass-deep); text-decoration: none; font-weight: 600; margin: 24px 0 20px; cursor: pointer; background: none; border: none; font-family: var(--sans); }
+.back-link:hover { color: var(--wine); }
+.lesson-placeholder { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 48px 32px; text-align: center; margin-bottom: 24px; }
+.lesson-placeholder .placeholder-icon { font-size: 32px; margin-bottom: 14px; }
+.lesson-placeholder h3 { font-family: var(--serif); font-size: 22px; color: var(--wine); margin-bottom: 10px; }
+.lesson-placeholder p { font-size: 14px; color: var(--text-2); max-width: 480px; margin: 0 auto; }
+.btn-complete {
+  margin-top: 24px; padding: 12px 22px; border-radius: 8px; border: none; cursor: pointer;
+  font-family: var(--sans); font-size: 14px; font-weight: 600; background: var(--sage-deep); color: #fff;
+}
+.btn-complete:hover { background: #5c6b52; }
+
+.sub-dashboard-intro { padding: 8px 0 24px; }
+.sub-dashboard-intro h3 { font-family: var(--serif); font-size: 26px; color: var(--wine); margin-bottom: 10px; }
+.sub-dashboard-intro p { font-size: 14.5px; color: var(--text-2); max-width: 640px; }
+
+/* Footer, restored in full */
+.recommended-route { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 20px; margin: 8px 0 20px; font-size: 13px; color: var(--text-2); }
+.recommended-route strong { color: var(--wine); }
+.storage-note { text-align: center; font-size: 12.5px; color: var(--text-3); padding: 4px 0 28px; }
+.storage-note button { background: none; border: none; color: var(--terracotta-deep); text-decoration: underline; cursor: pointer; font-size: 12.5px; font-family: var(--sans); }
+.education-notice { background: var(--ivory); border-radius: var(--radius); padding: 18px 22px; margin: 8px 0 32px; font-size: 13px; color: var(--text-2); text-align: center; }
+footer { background: var(--wine); color: var(--ivory); padding: 32px 0; margin-top: 20px; }
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px; margin-bottom: 16px; }
+.footer-links a { text-decoration: none; color: rgba(242,233,220,0.85); }
+.footer-links a:hover { color: #fff; }
+.footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12px; color: rgba(242,233,220,0.6); }
+.footer-bottom a { color: inherit; }
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
+h2[tabindex], h3[tabindex] { outline: none; }
+h2[tabindex]:focus-visible, h3[tabindex]:focus-visible { outline: 3px solid var(--brass); outline-offset: 4px; }
+
+#scroll-top-btn, #scroll-end-btn {
+  position: fixed; right: 26px; z-index: 999;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--wine); color: var(--ivory); border: none;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; box-shadow: 0 4px 16px rgba(43,22,32,0.3);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+#scroll-top-btn { bottom: 26px; }
+#scroll-end-btn { bottom: 84px; background: var(--brass-deep); }
+#scroll-top-btn.visible, #scroll-end-btn.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+#scroll-top-btn:hover { background: var(--wine-2); }
+#scroll-end-btn:hover { background: var(--brass); }
+#scroll-top-btn svg, #scroll-end-btn svg { width: 20px; height: 20px; }
+@media (prefers-reduced-motion: reduce) { #scroll-top-btn, #scroll-end-btn { transition: opacity 0.01s, visibility 0.01s; } }
+</style>
+</head>
+<body>
+
+<header class="site-header" style="position:relative;">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-mark"><svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="Discernment Wealth Academy compass mark"><circle cx="50" cy="50" r="42" fill="#F2E9DC" stroke="#2B1620" stroke-width="3"/><polygon points="50,12 50,50 60,50" fill="#B08D57"/><polygon points="50,12 50,50 40,50" fill="#B08D57"/><polygon points="50,88 50,50 60,50" fill="#2B1620"/><polygon points="50,88 50,50 40,50" fill="#2B1620"/><circle cx="50" cy="50" r="4.5" fill="#F2E9DC" stroke="#2B1620" stroke-width="1.5"/></svg></div>
+      <div class="brand-text">
+        <h1>Discernment Wealth Academy</h1>
+        <p>Foundations Command Centre</p>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainNavLinks" onclick="toggleMobileNav()">&#9776;</button>
+    <nav class="nav-links" id="mainNavLinks">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="foundations.html">Classic view</a>
+      <button class="jargon-nav-btn" onclick="openJargonBuster()">Jargon Buster</button>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ============================================================ -->
+  <!-- VIEW 1: COMMAND CENTRE -->
+  <!-- ============================================================ -->
+  <div class="view active" id="view-command-centre">
+
+    <div class="cc-intro">
+      <h2 id="ccHeading" tabindex="-1">Your Foundations journey</h2>
+      <p>Six phases, eight topics, worked through at your own pace. Start wherever your own situation actually needs you to start, not necessarily at the beginning.</p>
+    </div>
+
+    <div class="resource-row">
+      <button class="resource-chip" onclick="openJargonBuster()">Jargon Buster</button>
+      <button class="resource-chip" onclick="openScamChecker()">Protect Yourself from Scams</button>
+      <a class="resource-chip" href="foundations.html">Prefer the classic single page view</a>
+    </div>
+
+    <nav class="phase-path" aria-label="Journey progress">
+      <div class="phase-path-track" id="phasePathTrack"></div>
+      <div class="phase-path-mobile-line" id="phasePathMobileLine"></div>
+    </nav>
+
+    <div class="recommended-route">
+      <strong>Recommended route:</strong> Start Here, then Stabilise, Protect, Save, Invest, and finally Review and Next Steps. This order is a suggestion, not a requirement, every card below remains freely selectable regardless of where you are in the journey.
+    </div>
+
+    <div id="phaseSections"></div>
+
+    <div class="storage-note">
+      Your progress is stored only in this browser, on this device. It is not tied to an account and is not saved anywhere else. <button onclick="resetProgress()">Reset my progress</button>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- VIEW 2: REAL LESSONS (Cards 1-8 and Card 7 sub-lessons) -->
+  <!-- ============================================================ -->
+  <div class="view" id="view-lesson">
+    <button class="back-link" onclick="showCommandCentre()">&larr; Back to the Command Centre</button>
+    <article class="lesson-article">
+      <h3 id="lessonHeading" tabindex="-1"></h3>
+      <div class="lesson-block"><h6>Learn</h6><div id="lessonLearn"></div></div>
+      <div class="lesson-block"><h6>See</h6><div id="lessonSee"></div></div>
+      <div class="lesson-block"><h6>Reflect</h6><div id="lessonReflect"></div></div>
+      <div class="lesson-block"><h6>Act</h6><div id="lessonAct"></div></div>
+      <div class="lesson-block"><h6>Record</h6><div id="lessonRecord"></div></div>
+      <button class="btn-complete" onclick="markCurrentComplete()">Mark this section complete and continue</button>
+    </article>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- VIEW 3: LESSON PLACEHOLDER (used for any card without content yet) -->
+  <!-- ============================================================ -->
+  <div class="view" id="view-lesson-placeholder">
+    <button class="back-link" onclick="showCommandCentre()">&larr; Back to the Command Centre</button>
+    <div class="lesson-placeholder">
+      <div class="placeholder-icon" aria-hidden="true">&#9998;</div>
+      <h3 id="placeholderTitle" tabindex="-1">This lesson is being rebuilt</h3>
+      <p>Existing material remains available in the classic view where applicable. New lessons are being added directly to this Command Centre.</p>
+      <button class="btn-complete" onclick="markCurrentComplete()">Mark this section complete and continue</button>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- VIEW 3: CARD 7 SUB-DASHBOARD -->
+  <!-- ============================================================ -->
+  <div class="view" id="view-card7-dashboard">
+    <button class="back-link" onclick="showCommandCentre()">&larr; Back to the Command Centre</button>
+    <div class="sub-dashboard-intro">
+      <h3 id="card7Heading" tabindex="-1">Explore Saving and Investment Options</h3>
+      <p>Four options, each with its own place. Premium Bonds sits alongside the ISA options here despite being neither an ISA nor an investment in the usual sense, worth exploring on its own terms rather than skipped for not fitting the other three neatly.</p>
+    </div>
+    <div class="card-grid" id="card7SubGrid"></div>
+  </div>
+
+</main>
+
+<button id="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+<button id="scroll-end-btn" aria-label="Scroll to end of this view" title="Scroll to end of this view">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/></svg>
+</button>
+
+<div class="container">
+  <div class="education-notice">
+    Discernment Wealth Academy provides general financial education and information only. Nothing here is personalised financial advice.
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="foundations.html#money-companion-workbook" target="_blank" rel="noopener">Money Companion Workbook</a>
+      <a href="about.html">About</a>
+      <a href="index.html">Home</a>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Samuel Angus trading as Discernment Wealth Academy. All rights reserved.</span>
+      <span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a></span>
+    </div>
+  </div></footer>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const LESSON_CONTENT = {
+  card1: {
+    learn: `<p>Most financial advice assumes a simple chain of events, learn the facts, then act on them. But knowing what to do and actually doing it are two different problems, and the gap between them is rarely a lack of information. It is usually a pattern, something that happens quietly, the same way, every time money comes up.</p><p>This first step exists to name that pattern honestly, before anything else. Not to fix it in one sitting, and not to diagnose anything, simply to notice it clearly enough that the rest of Foundations can actually be used.</p>`,
+    see: `<p>Someone knows, in principle, that they should look at what is coming in and going out each month. Every time they go to actually open the banking app, something else takes priority instead. Weeks pass. The knowing never leaves, and neither does the not-checking. From the inside, this is rarely carelessness, it is usually something closer to a quiet, understandable flinch away from a feeling, repeated often enough to become the actual pattern.</p>`,
+    reflect: `<p>The Your Relationship With Money tool on the classic Foundations page asks five honest questions and names one of five patterns many people recognise in themselves, avoidance, self-criticism, overwhelm, disengagement, or a plateau. No answer is wrong, this is a reflection tool, not a diagnosis. <a href="foundations.html#money-quiz" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">Take the reflection &rarr;</a></p>`,
+    act: `<p>Whatever pattern surfaced, pick one small, concrete action that runs slightly against it this week. If avoidance was the pattern, open the banking app once this week, only to look. If overwhelm, pick one single thing to check rather than everything at once. Small and specific matters more than ambitious here.</p>`,
+    record: `<p>For version 1.0, this stays deliberately separate from the workbook. In your notebook, phone, or another place you can return to, complete this sentence, "The money pattern I recognise most strongly in myself is ____." Keep it nearby, you will return to it during Review and Next Steps.</p>`,
+  },
+  card2: {
+    learn: `<p>An asset is something you own that has financial value. Examples can include savings, investments held inside a Stocks and Shares ISA, property, and some types of pension savings.</p><p>A liability is money you owe or a financial obligation you must repay. Examples include a mortgage, personal loan, overdraft, or credit card balance, whether or not it is currently charging interest.</p><p>Add the estimated value of your assets, then subtract everything you owe. The result is commonly called your net worth, a financial snapshot taken at a particular time, not a measure of your personal worth or a prediction of your future.</p>`,
+    see: `<p>Someone might judge their whole financial situation by whichever figure they see most often, a current account balance checked every day, or a credit card statement received each month. That single number can quietly become the entire story when it is only one part of a much bigger picture.</p>`,
+    reflect: `<p>Before doing the calculation, what is your honest impression? Do you think the value of what you own is greater than what you owe, or the other way around? Is that impression based on figures you have recently checked, or a general feeling you have carried without examining it fully?</p>`,
+    act: `<p>Without opening the full worksheet yet, identify two things you own and two amounts you owe. Write them down or simply bring them to mind. This is a quick first impression, not the complete calculation.</p>`,
+    record: `<p>Complete Worksheet Six, Assets and Liabilities, in the Money Companion Workbook. For a defined contribution pension, use the value on your latest statement. A defined benefit pension normally promises a future income rather than a pot of money, record that expected income separately, do not invent a capital value. <a href="foundations.html#money-companion-workbook" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">Open the workbook &rarr;</a></p>`,
+  },
+  card3: {
+    learn: `<p>Most people believe they know where their money goes. Few know with certainty until they write it down. A budget is a way of seeing clearly, what money comes in, which costs are essential, what is committed elsewhere, and what remains available for deliberate choices.</p><p>Ecclesiastes 11:2 teaches, "Give a portion to seven, and also to eight; for thou knowest not what evil shall be upon the earth." A budget puts that principle of preparation into practice.</p>`,
+    see: `<p>Imagine a household receiving £2,000 a month after deductions. Rent or mortgage, utility bills, food, and transport might total £1,400. That leaves £600 before allowing for irregular expenses, debt repayments, saving, and other commitments. It is not automatically spare money, it is money that still needs a plan.</p>`,
+    reflect: `<p>If you listed every essential outgoing this month, would the total, and the amount remaining, surprise you in either direction?</p>`,
+    act: `<p>Find your actual income for last month, after tax and other deductions. Write down that total clearly. Nothing else is required at this stage. If your income changes each month, use last month's actual figure for now.</p>`,
+    record: `<p>Complete Worksheet One, Know Where Your Money Goes, in the Money Companion Workbook. Keep two results separate, your essential monthly outgoings, which Card 5 uses to calculate an emergency fund target, and the amount remaining after outgoings. <a href="foundations.html#money-companion-workbook" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">Open the workbook &rarr;</a></p>`,
+  },
+  card4: {
+    learn: `<p>Before ranking debts by cost, one distinction matters more than interest rate. Priority debts are those with the most serious consequences if left unpaid, rent or mortgage arrears, Council Tax, energy arrears, court fines, child maintenance, and certain tax debts. MoneyHelper is explicit that these come first, not because of their rate, but because non-payment can threaten your home, essential services, or legal position. Only once priority debts and minimum payments are covered should ordinary borrowing, credit cards, personal loans, overdrafts, be ranked by interest rate.</p>`,
+    see: `<p>A credit card balance sitting there is quietly costing you money. £2,000 owed at 24.9% a year costs approximately £498 over a year, assuming the balance remains unchanged and excluding additional fees. That is the cost of continuing to carry the balance. Avoiding that interest is certain. What an investment might return is not, and can be negative in any given year. That difference, certain cost against uncertain return, is why clearing high-cost, non-priority debt is usually the higher priority once priority debts and minimum payments are already covered.</p>`,
+    reflect: `<p>If you listed every debt and bill you carry, which ones would genuinely put your home, your essential services, or your legal standing at risk if left unpaid, regardless of their interest rate?</p>`,
+    act: `<p>List each debt or bill you carry: its name, balance, interest rate if it has one, your minimum payment, and whether it is a priority debt, rent or mortgage, Council Tax, energy, court fines, child maintenance, or certain tax debts. Mark the priority ones clearly, separate from the rest.</p>`,
+    record: `<p>Complete Worksheet Three, Rank Your Debts, in the Money Companion Workbook. First identify any priority debts or essential bills in arrears, these need attention because of the consequences of non-payment, not their interest rate. For everything else, rank from highest APR to lowest. This shows which borrowing carries the highest cost for each pound owed and where additional repayments will generally save the most interest. <a href="foundations.html#money-companion-workbook" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">Open the workbook &rarr;</a></p><p>If you are behind with priority payments or cannot meet your minimum payments, seek free, confidential help from <a href="https://www.moneyhelper.org.uk/en/everyday-money/credit/how-to-prioritise-your-debts" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">MoneyHelper</a> or <a href="https://www.stepchange.org/how-we-help.aspx" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">StepChange</a> before deciding what to pay first.</p>`,
+  },
+  card5: {
+    learn: `<p>An emergency fund is money held back for the unexpected, a boiler breaking, a job loss, an unplanned bill, kept somewhere you can reach quickly rather than invested. Investments can fall in value at exactly the moment you need to sell, turning a temporary dip into a real loss. Cash held for emergencies does not have that problem. Without this cushion, an unexpected cost often becomes debt, a credit card balance or a loan taken out under pressure rather than by choice.</p><p>According to the <a href="https://www.fca.org.uk/news/press-releases/more-people-have-bank-accounts-one-ten-have-no-cash-savings" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">FCA's own Financial Lives 2024 survey</a>, 1 in 10 UK adults have no cash savings at all, and a further 21% have less than £1,000 to draw on in an emergency. If any of that sounds familiar, you are genuinely not alone.</p><p><strong>If you need help right now</strong>, an emergency fund is something to build for the future. If you are facing a genuine financial shock today, real support already exists. In England, the Crisis and Resilience Fund is administered through local councils, Scotland, Wales and Northern Ireland have different arrangements. <a href="https://www.turn2us.org.uk/get-support/information-for-your-situation/crisis-and-resilience-fund/what-is-the-crisis-and-resilience-fund" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">Turn2us, find your local scheme &rarr;</a></p>`,
+    see: `<p>Someone with essential monthly outgoings of £1,400 might reasonably aim for <a href="https://www.moneyhelper.org.uk/en/savings/types-of-savings/emergency-savings-how-much-is-enough" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">3 to 6 months of cover</a>, a benchmark rather than a compulsory target, somewhere between £4,200 and £8,400. That figure can feel out of reach all at once, which is exactly why it rarely gets built in one go. Saving £100 a month reaches the lower end of that range in under 4 years, and every pound saved along the way reduces the chance of a shock expense turning into debt instead.</p>`,
+    reflect: `<p>If something unexpected happened this month, a lost income or a large bill, how many weeks could you cover it before you would need to borrow?</p>`,
+    act: `<p>Use the essential monthly outgoings figure from Card 3, and decide how many months of cover feels right for your own situation, 3 to 6 months is the common benchmark, though even a smaller amount provides useful protection.</p>`,
+    record: `<p>Complete Worksheet Two, Calculate Your Emergency Fund, in the Money Companion Workbook. Use your essential monthly outgoings from Worksheet One, not your total spending, this guidance is built around covering the basics if income stopped. <a href="foundations.html#money-companion-workbook" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">Open the workbook &rarr;</a></p>`,
+  },
+  card6: {
+    learn: `<p>"Save more" rarely works as a plan, since it names no destination and no amount. A saving goal that actually holds up has three things, a specific purpose, a rough figure, and a rough timeframe, a deposit in two years, a car in eighteen months, a wedding next summer. Vague saving tends to get raided by whatever feels urgent this month, a named goal is easier to protect.</p><p>Saving towards a specific goal becomes more resilient once you have begun building protection against unexpected costs. Depending on your circumstances, a smaller emergency buffer and another important saving goal may sometimes grow alongside each other.</p>`,
+    see: `<p>Someone decides, vaguely, to "save more this year." Twelve months later, little has actually accumulated, not from a lack of will, but because nothing was ever named specifically enough to protect. A colleague, saving for a specific holiday eighteen months out, names the figure, sets a manageable standing order shortly after payday, and reviews the amount whenever circumstances change.</p>`,
+    reflect: `<p>If you had to name one thing you are genuinely saving toward right now, not what you feel you should be saving for, what would it actually be?</p>`,
+    act: `<div id="c6CalcWrap">
+      <p style="margin-bottom:12px;">This does not simply subtract essential outgoings from income. It also accounts for debt repayments, regular commitments, irregular costs, and your emergency fund, so the result is not overstated as automatically available. Enter each outgoing only once, do not count something under both essential outgoings and regular commitments.</p>
+      <div class="c6-calc-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div><label style="font-size:12.5px;color:var(--text-2);">Take-home pay per month (£)<input type="number" id="c6Income" value="2000" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div>
+        <div><label style="font-size:12.5px;color:var(--text-2);">Essential outgoings per month (£)<input type="number" id="c6Essentials" value="1400" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div>
+        <div><label style="font-size:12.5px;color:var(--text-2);">Minimum debt repayments (£)<input type="number" id="c6Debt" value="0" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div>
+        <div><label style="font-size:12.5px;color:var(--text-2);">Other regular commitments (£)<input type="number" id="c6Commit" value="0" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div>
+        <div><label style="font-size:12.5px;color:var(--text-2);">Monthly allowance for irregular costs (£)<input type="number" id="c6Irregular" value="0" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div>
+        <div><label style="font-size:12.5px;color:var(--text-2);">Planned emergency fund contribution (£)<input type="number" id="c6Emergency" value="0" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div>
+      </div>
+      <button class="btn-start" style="margin-top:0;" onclick="calcCard6()">Calculate</button>
+      <div id="c6Result" style="margin-top:12px;font-weight:600;color:var(--wine);" aria-live="polite"></div>
+      <p style="font-size:12px;color:var(--text-3);margin-top:8px;">This figure is money still to allocate, it is not automatically available to invest. Consider your own priorities and any other commitments before deciding what to do with it.</p>
+    </div>`,
+    record: `<p>There is no dedicated workbook worksheet for this specific step. In your notebook, phone, or another place you can return to, name your saving goal, its rough figure, and its rough timeframe. Keep it somewhere you will actually see it again, not just this once.</p>`,
+  },
+  'card7-cash-isa': {
+    learn: `<p>A Cash ISA works the same way as an ordinary savings account, your money sits there and earns interest, except the interest is entirely free of tax. The £20,000 yearly ISA allowance limits how much you can pay in, shared across every ISA you hold, it does not limit or reduce as interest accumulates. It is the simplest, lowest risk account here, your balance cannot fall in value the way an investment can. What it does not protect you from is inflation, if prices rise faster than your interest rate, the same amount of money buys less than it used to, even though the number on the screen never goes down.</p><p><strong>A change from April 2027</strong>, from 6 April 2027, anyone under 65 will be limited to £12,000 a year in a Cash ISA, the overall £20,000 allowance stays the same. Money already in a Cash ISA is unaffected. If you are 65 or over, none of this applies.</p>`,
+    see: `<p>£10,000 in a Cash ISA paying 4% a year earns £400 in interest, entirely tax free. If inflation that year runs at 3%, the real gain, what that money can actually buy, is closer to 1%, roughly £100 in today's terms. Not every Cash ISA is immediately accessible, some fixed-term accounts restrict withdrawals or impose a penalty. This is why an appropriate easy-access Cash ISA suits money you want completely safe and accessible, an emergency fund, or savings needed within the next year or two, rather than money you are hoping will grow substantially over the long term.</p>`,
+    reflect: `<p>Of the money you currently hold in cash, how much of it is genuinely there for safety and access, and how much has simply never been moved anywhere else?</p>`,
+    act: `<p>Check the interest rate your current cash savings are actually earning, and compare it against a genuine Cash ISA rate. If your savings sit outside an ISA and pay tax on the interest, this is worth a closer look.</p>`,
+    record: `<p>This is general education, not personal advice on what you should do with your own ISA. Rules of this kind can still be adjusted before April 2027, check GOV.UK nearer the date for the confirmed position.</p>`,
+  },
+  'card7-ss-isa': {
+    learn: `<p>A Stocks and Shares ISA invests your money in the stock market rather than holding it as cash, and any growth or income is entirely free of tax, up to the same shared yearly allowance as a Cash ISA. Unlike a Cash ISA, the value can genuinely fall as well as rise, particularly over shorter periods. Over long periods, decades rather than months, global stock markets have historically grown faster than cash savings, which is why this account tends to suit money you can leave alone.</p><p>The FCA's own Financial Lives 2024 survey found that 61% of people holding more than £10,000 in investable assets keep at least three-quarters of it sitting in cash rather than invested, which may reflect caution, circumstances, or uncertainty about investing, rather than any single reason.</p>`,
+    see: `<p>£10,000 growing at a purely hypothetical 7% a year, before fees and inflation, would be worth roughly £19,670 after 10 years, entirely free of tax. This is an illustration, not an expectation, actual returns are never guaranteed and can be negative in any given year. Along the way, some years would show a fall rather than a gain, that is normal. The person who withdraws everything the first time the value dips locks in that loss permanently. Diversification and time reduce some risks but never guarantee it.</p>`,
+    reflect: `<p>If your investments fell in value next month, would you actually leave them alone, or is that easier to say now than it would be to do then?</p>`,
+    act: `<p>Take the Risk Tolerance Quiz on the classic Foundations page before deciding whether this account suits your own situation. Goals, timeframe, financial resilience, and capacity for loss all matter alongside your comfort with risk. <a href="foundations.html#risk-tolerance-quiz" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">Open the Risk Tolerance Quiz &rarr;</a></p><div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--line);"><p style="margin-bottom:10px;">See how regular investing could grow over time, in real numbers, illustrative only, before comparing platform and fund fees below.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;" class="c6-calc-grid"><div><label style="font-size:12.5px;color:var(--text-2);">Monthly amount (£)<input type="number" id="cowMonthly" value="100" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div><div><label style="font-size:12.5px;color:var(--text-2);">Years invested<input type="number" id="cowYears" value="10" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div><div><label style="font-size:12.5px;color:var(--text-2);">Assumed annual growth (%)<input type="number" id="cowRate" value="7" step="0.5" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div></div><button class="btn-start" style="margin-top:0;" onclick="calcCostOfWaiting()">Calculate</button><div id="cowResult" style="margin-top:12px;font-weight:600;color:var(--wine);" aria-live="polite"></div><p style="font-size:12px;color:var(--text-3);margin-top:8px;">Illustrative only, based on the figures you enter. Growth is never guaranteed. This is not a forecast or advice.</p></div><div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--line);"><p style="margin-bottom:10px;">See how much a fee difference actually costs over time, the same investment, growing at the same rate before fees, compared at two different fee levels.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;" class="c6-calc-grid"><div><label style="font-size:12.5px;color:var(--text-2);">Amount invested (£)<input type="number" id="feeAmount2" value="10000" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div><div><label style="font-size:12.5px;color:var(--text-2);">Years invested<input type="number" id="feeYears2" value="30" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div><div><label style="font-size:12.5px;color:var(--text-2);">Assumed annual growth before fees (%)<input type="number" id="feeGrowth2" value="7" step="0.5" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div><div></div><div><label style="font-size:12.5px;color:var(--text-2);">Lower fee, e.g. a low-cost tracker (%)<input type="number" id="feeLow2" value="0.2" step="0.05" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div><div><label style="font-size:12.5px;color:var(--text-2);">Higher fee, e.g. an actively managed fund (%)<input type="number" id="feeHigh2" value="1.0" step="0.05" min="0" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-top:3px;"></label></div></div><button class="btn-start" style="margin-top:0;" onclick="calcFeeImpact()">Calculate</button><div id="feeResult2" style="margin-top:12px;font-weight:600;color:var(--wine);" aria-live="polite"></div><p style="font-size:12px;color:var(--text-3);margin-top:8px;">Illustrative only. Enter the actual ongoing charges shown on a fund or platform's own factsheet for a genuine comparison, real fees vary by provider and product.</p></div>`,
+    record: `<p>This is general education, not a recommendation to invest. Consider your own capacity for loss, timeframe, and whether an emergency fund already exists before directing money here.</p>`,
+  },
+  'card7-lisa': {
+    learn: `<p>A Lifetime ISA is one of the few places the government adds money to your savings simply for using it. Save into one and the government tops it up by 25%, up to the yearly limit, provided you are between 18 and 39 when you open it. That bonus is only meant for two things, buying your first home, or being taken out from age 60 onward. Take the money out for any other reason, and a withdrawal charge applies that claws back more than the bonus was worth.</p><p><strong>A change on the way</strong>, HM Treasury is consulting on a proposed First Time Buyer ISA that would eventually be offered instead of new Lifetime ISAs. The final design and implementation date have not yet been confirmed. Until a replacement becomes available, eligible people can still open a Lifetime ISA. Existing holders would be able to continue contributing under the current rules indefinitely.</p>`,
+    see: `<p>Someone paying in £4,000 over a year receives a £1,000 government bonus, taking the total to £5,000 before any growth. Now imagine that same person needs the money two years later for something other than a first home. A 25% withdrawal charge applies to the full amount, not just the bonus, which in practice can mean losing more than the bonus ever added.</p>`,
+    reflect: `<p>If you are saving specifically toward a first home or retirement, does locking the money to those two purposes feel like a helpful boundary, or a risk given how life sometimes changes course?</p>`,
+    act: `<p>Check whether you meet the age rules for opening one, 18 to 39. If you already hold one, this age rule does not affect your existing account at all.</p>`,
+    record: `<p>Correct as understood from a Treasury consultation published June 2026, which had not concluded at the time of writing. Check GOV.UK for the confirmed position before making a decision based on this alone.</p>`,
+  },
+  'card7-premium-bonds': {
+    learn: `<p>Premium Bonds are issued by NS&I, National Savings and Investments, and are backed by HM Treasury, meaning 100% of the money held is secure, not restricted to the ordinary bank deposit protection limit. The maximum holding is £50,000 per person, a purchase limit rather than a protection limit. Rather than paying guaranteed interest, your money is entered into a monthly prize draw instead, anywhere from £25 up to £1,000,000, entirely tax free, or nothing at all in a given month.</p>`,
+    see: `<p>NS&I quotes an average prize-fund rate, currently 3.80%, which is an average paid out across every eligible Bond in the draw, not an individual guaranteed or typical return. Someone holding £1,000 in Premium Bonds could win nothing at all in a given month, or could win considerably more than that average would suggest, since every prize is decided by a monthly random draw rather than paid evenly like interest. This is very different to a Cash ISA, where a rate is genuinely applied to every pound held every month.</p>`,
+    reflect: `<p>Does the appeal of a possible larger prize matter more to you than a smaller but certain return, or would a predictable Cash ISA actually sit better with how you think about your savings?</p>`,
+    act: `<p>Read how the prize draw actually works before deciding whether it suits your own situation, then compare it honestly against a guaranteed-rate Cash ISA for the same amount.</p>`,
+    record: `<p>Premium Bonds suit money you want completely safe and are happy to hold for the chance of a prize, rather than money you are relying on for predictable, steady growth.</p>`,
+  },
+  card8: {
+    learn: `<p>Automatic enrolment means that if you are aged between 22 and State Pension age and earn above £10,000 a year, your employer must place you into a workplace pension and contribute alongside you, whether you take any action or not. For the 2026/27 tax year, the minimum total contribution is 8% of your qualifying earnings, the band between £6,240 and £50,270, with at least 3% coming from your employer and the rest, typically 5%, from you, including tax relief. Opting out does not save that money for something else, it simply means turning down the employer contribution entirely, money that was otherwise yours for the taking.</p><p><strong>Beyond the minimum</strong>, many employers offer to match contributions above this legal minimum. This is not always obvious from a payslip alone, worth asking your HR team or pension provider directly, any additional match normally requires the employee to choose a higher contribution rather than remaining at the default rate.</p>`,
+    see: `<p>Someone earning £30,000 a year has qualifying earnings of £23,760, £30,000 minus the £6,240 starting point. 8% of that figure is £1,900 a year, roughly. The employer must provide at least 3% of that, around £712. The remaining contribution, close to £1,188, would normally come from the employee and applicable tax relief, for example, roughly £950 from take-home pay and £238 from basic-rate tax relief under a typical relief-at-source arrangement. Exactly how this appears in take-home pay depends on how the workplace scheme provides tax relief, relief at source, net pay, or salary sacrifice each work differently. Opting out would mean giving up that £712 a year from the employer alone, every year it continues.</p>`,
+    reflect: `<p>If you opted out of your workplace pension tomorrow, would that money actually go toward another saving or investment, or would it most likely just be spent?</p>`,
+    act: `<p>Find your latest pension statement, or log into your scheme's online portal. Check what percentage you and your employer are each actually contributing, and whether your employer offers to match above the legal minimum.</p>`,
+    record: `<p>Complete Worksheet Five, Workplace Pension Check, in the Money Companion Workbook. Figures shown here are the confirmed minimum contribution rates and earnings thresholds for the 2026/27 tax year, reviewed annually by the Department for Work and Pensions. Check GOV.UK or The Pensions Regulator for the current year's figures before relying on these for your own planning. <a href="foundations.html#money-companion-workbook" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">Open the workbook &rarr;</a></p>`,
+  },
+};
+
+const PHASES = [
+  { id: 'start-here', label: 'Start Here' },
+  { id: 'stabilise', label: 'Stabilise' },
+  { id: 'protect', label: 'Protect' },
+  { id: 'save', label: 'Save' },
+  { id: 'invest', label: 'Invest' },
+  { id: 'review', label: 'Review and Next Steps' },
+];
+
+const CARDS = [
+  { id: 'card1', hash: 'card-1', phase: 'start-here', num: 1, title: 'Understand Your Relationship with Money', outcome: 'Explore money beliefs, habits, and present concerns.', firstStep: 'First step: take the five question reflection.', time: '10 min', icon: '&#128173;' },
+  { id: 'card2', hash: 'card-2', phase: 'start-here', num: 2, title: 'Understand What You Own and Owe', outcome: 'Record assets, liabilities, and establish a financial starting position.', firstStep: 'First step: name two things you own and two amounts you owe.', time: '15 min', icon: '&#128203;' },
+  { id: 'card3', hash: 'card-3', phase: 'stabilise', num: 3, title: 'Take Control of Spending', outcome: 'Understand income, essential costs, and where money goes.', firstStep: 'First step: find last month\u2019s actual take-home pay.', time: '15 min', icon: '&#128176;' },
+  { id: 'card4', hash: 'card-4', phase: 'stabilise', num: 4, title: 'Understand and Reduce Debt', outcome: 'Identify priority debts, then review interest rates and repayment choices.', firstStep: 'First step: mark which of your debts or bills are priority ones.', time: '15 min', icon: '&#128202;' },
+  { id: 'card5', hash: 'card-5', phase: 'protect', num: 5, title: 'Build Financial Resilience', outcome: 'Establish an emergency fund target and prepare for unexpected costs.', firstStep: 'First step: find your essential monthly outgoings figure.', time: '10 min', icon: '&#128737;' },
+  { id: 'card6', hash: 'card-6', phase: 'save', num: 6, title: 'Start Saving with Purpose', outcome: 'Set goals and develop manageable saving habits.', firstStep: 'First step: name one thing you are genuinely saving toward.', time: '10 min', icon: '&#127919;' },
+  { id: 'card7', hash: 'card-7', phase: 'invest', num: 7, title: 'Explore Saving and Investment Options', outcome: 'Cash ISAs, Stocks and Shares ISAs, Lifetime ISAs, and Premium Bonds.', firstStep: 'First step: choose one of the four options to explore.', time: '4 topics', icon: '&#128200;', subDashboard: true },
+  { id: 'card8', hash: 'card-8', phase: 'invest', num: 8, title: 'Know Your Workplace Pension', outcome: 'Understand contributions, employer payments, and long-term value.', firstStep: 'First step: find your latest pension statement.', time: '10 min', icon: '&#127974;' },
+  { id: 'review', hash: 'review', phase: 'review', num: null, title: 'Review and Next Steps', outcome: 'Bring the learning together and identify your next manageable actions.', firstStep: 'First step: revisit any card left incomplete.', time: '10 min', icon: '&#10003;', isReview: true },
+];
+
+const CARD7_SUBS = [
+  { id: 'card7-cash-isa', hash: 'card-7-cash-isa', title: 'Cash ISAs', outcome: 'Saving without paying tax on the interest.', firstStep: 'First step: check your current savings interest rate.' },
+  { id: 'card7-ss-isa', hash: 'card-7-ss-isa', title: 'Stocks and Shares ISAs', outcome: 'Investing for longer term growth.', firstStep: 'First step: take the risk tolerance reflection.' },
+  { id: 'card7-lisa', hash: 'card-7-lisa', title: 'Lifetime ISAs', outcome: 'Saving for a first home or later life, including the rules and the withdrawal penalty.', firstStep: 'First step: check whether you meet the age rules for opening one.' },
+  { id: 'card7-premium-bonds', hash: 'card-7-premium-bonds', title: 'Premium Bonds', outcome: 'Government backed saving with prize based returns rather than guaranteed interest.', firstStep: 'First step: read how the prize draw actually works.' },
+];
+
+const ALL_ITEMS = [...CARDS.filter(c => !c.subDashboard), ...CARD7_SUBS];
+let currentOpenId = null;
+
+// ============================================================
+// PROGRESS TRACKING
+// ============================================================
+function getProgress() {
+  try { return JSON.parse(localStorage.getItem('dwa_foundations_progress') || '{}'); }
+  catch (e) { return {}; }
+}
+function setProgress(id, state) {
+  const progress = getProgress();
+  progress[id] = state;
+  try { localStorage.setItem('dwa_foundations_progress', JSON.stringify(progress)); }
+  catch (e) { /* storage unavailable, progress will not persist */ }
+}
+function getItemState(id) {
+  const progress = getProgress();
+  return progress[id] || 'not-started';
+}
+function resetProgress() {
+  if (confirm('Reset all progress on this browser? This cannot be undone.')) {
+    try { localStorage.removeItem('dwa_foundations_progress'); } catch (e) {}
+    showCommandCentre();
+  }
+}
+
+// Card 7's own state is derived from its four sub-cards, never stored independently.
+function getCard7DerivedState() {
+  const states = CARD7_SUBS.map(s => getItemState(s.id));
+  if (states.every(s => s === 'completed')) return 'completed';
+  if (states.some(s => s !== 'not-started')) return 'in-progress';
+  return 'not-started';
+}
+function getCardState(card) {
+  return card.subDashboard ? getCard7DerivedState() : getItemState(card.id);
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+function statusLabel(state) {
+  if (state === 'completed') return 'Completed';
+  if (state === 'in-progress') return 'In progress';
+  return 'Not started';
+}
+
+function renderPhasePath() {
+  const track = document.getElementById('phasePathTrack');
+  const phaseCompletion = PHASES.map(phase => {
+    const phaseCards = CARDS.filter(c => c.phase === phase.id);
+    const states = phaseCards.map(getCardState);
+    return states.length > 0 && states.every(s => s === 'completed');
+  });
+  const allPhasesComplete = phaseCompletion.every(Boolean);
+  // The first phase not yet fully completed, whether it has some progress or none at all,
+  // is the genuinely correct "current" phase, not merely the first phase with any activity.
+  const firstIncompleteIndex = phaseCompletion.indexOf(false);
+
+  track.innerHTML = PHASES.map((phase, i) => {
+    let cls = 'phase-point';
+    if (phaseCompletion[i]) cls += ' reached';
+    else if (i === firstIncompleteIndex) cls += ' current';
+    return `<div class="${cls}"><div class="phase-dot" aria-hidden="true">${i+1}</div><div class="phase-label">${phase.label}</div></div>`;
+  }).join('');
+
+  const mobileLine = allPhasesComplete
+    ? 'Foundations complete — Review your next steps'
+    : `Phase ${firstIncompleteIndex+1} of ${PHASES.length} — ${PHASES[firstIncompleteIndex].label}`;
+  document.getElementById('phasePathMobileLine').textContent = mobileLine;
+}
+
+function renderPhaseSections() {
+  const container = document.getElementById('phaseSections');
+  container.innerHTML = PHASES.map((phase, i) => {
+    const phaseCards = CARDS.filter(c => c.phase === phase.id);
+    if (phaseCards.length === 0) return '';
+    const cardsHtml = phaseCards.map(renderCard).join('');
+    return `
+      <section class="phase-section">
+        <div class="phase-heading">
+          <span class="phase-num">PHASE ${i+1} OF ${PHASES.length}</span>
+          <h3>${phase.label}</h3>
+        </div>
+        <div class="card-grid">${cardsHtml}</div>
+      </section>
+    `;
+  }).join('');
+}
+
+function renderCard(card) {
+  const state = getCardState(card);
+  const subClass = card.subDashboard ? ' sub-dashboard' : '';
+  const buttonLabel = state === 'not-started' ? 'Start section' : (state === 'completed' ? 'Review section' : 'Continue where you left off');
+  const isSubDashboard = !!card.subDashboard;
+  const buttonAttrs = isSubDashboard
+    ? `data-action="open-card7-dashboard"`
+    : `data-action="open-lesson" data-item-id="${card.id}" data-hash="${card.hash}" data-title="${card.title.replace(/"/g, '&quot;')}"`;
+  return `
+    <div class="topic-card${subClass}">
+      <div class="topic-card-top">
+        <div class="topic-icon" aria-hidden="true">${card.icon}</div>
+        <span class="status-badge ${state}">${statusLabel(state)}</span>
+      </div>
+      <h4>${card.num ? card.num + '. ' : ''}${card.title}</h4>
+      <p class="outcome">${card.outcome}</p>
+      <p class="first-step">${card.firstStep}</p>
+      <div class="topic-card-meta">
+        <span>${card.time}</span>
+        ${card.subDashboard ? '<span class="sub-count">Opens 4 topics</span>' : ''}
+      </div>
+      <button class="btn-start" ${buttonAttrs}>${card.subDashboard ? 'Explore options' : buttonLabel}</button>
+    </div>
+  `;
+}
+
+function renderCard7SubGrid() {
+  const grid = document.getElementById('card7SubGrid');
+  grid.innerHTML = CARD7_SUBS.map(sub => {
+    const state = getItemState(sub.id);
+    const buttonLabel = state === 'not-started' ? 'Start section' : (state === 'completed' ? 'Review section' : 'Continue where you left off');
+    return `
+      <div class="topic-card">
+        <div class="topic-card-top">
+          <div class="topic-icon" aria-hidden="true">&#128204;</div>
+          <span class="status-badge ${state}">${statusLabel(state)}</span>
+        </div>
+        <h4>${sub.title}</h4>
+        <p class="outcome">${sub.outcome}</p>
+        <p class="first-step">${sub.firstStep}</p>
+        <button class="btn-start" data-action="open-lesson" data-item-id="${sub.id}" data-hash="${sub.hash}" data-title="${sub.title.replace(/"/g, '&quot;')}">${buttonLabel}</button>
+      </div>
+    `;
+  }).join('');
+}
+
+// ============================================================
+// VIEW SWITCHING, WITH FOCUS MANAGEMENT AND HASH ROUTING
+// ============================================================
+function switchView(viewId, focusElId) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(viewId).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const focusEl = document.getElementById(focusElId);
+  if (focusEl) focusEl.focus();
+}
+
+function showCommandCentre(skipHashUpdate) {
+  currentOpenId = null;
+  renderPhasePath();
+  renderPhaseSections();
+  switchView('view-command-centre', 'ccHeading');
+  if (!skipHashUpdate) history.pushState(null, '', window.location.pathname);
+}
+
+function openLesson(itemId, hash, title, skipHashUpdate) {
+  currentOpenId = itemId;
+  if (getItemState(itemId) === 'not-started') setProgress(itemId, 'in-progress');
+  const content = LESSON_CONTENT[itemId];
+  if (content) {
+    document.getElementById('lessonHeading').textContent = title;
+    document.getElementById('lessonLearn').innerHTML = content.learn;
+    document.getElementById('lessonSee').innerHTML = content.see;
+    document.getElementById('lessonReflect').innerHTML = content.reflect;
+    document.getElementById('lessonAct').innerHTML = content.act;
+    document.getElementById('lessonRecord').innerHTML = content.record;
+    switchView('view-lesson', 'lessonHeading');
+  } else {
+    document.getElementById('placeholderTitle').textContent = title;
+    switchView('view-lesson-placeholder', 'placeholderTitle');
+  }
+  if (!skipHashUpdate) history.pushState(null, '', '#' + hash);
+}
+
+function openCard7Dashboard(skipHashUpdate) {
+  currentOpenId = 'card7';
+  renderCard7SubGrid();
+  switchView('view-card7-dashboard', 'card7Heading');
+  if (!skipHashUpdate) history.pushState(null, '', '#card-7');
+}
+
+function markCurrentComplete() {
+  if (currentOpenId) {
+    setProgress(currentOpenId, 'completed');
+    // If this was a Card 7 sub-card, return to the sub-dashboard, its parent state is derived automatically.
+    const isSub = CARD7_SUBS.some(s => s.id === currentOpenId);
+    if (isSub) { openCard7Dashboard(); return; }
+  }
+  showCommandCentre();
+}
+
+function openJargonBuster() {
+  window.open('foundations.html#jargon-buster', '_blank', 'noopener');
+}
+function openScamChecker() {
+  window.open('foundations.html#scam-checker', '_blank', 'noopener');
+}
+
+// Handle direct links and the browser Back/Forward buttons
+function routeFromHash() {
+  const hash = window.location.hash.replace('#', '');
+  if (!hash) { showCommandCentre(true); return; }
+  if (hash === 'card-7') { openCard7Dashboard(true); return; }
+  const card = ALL_ITEMS.find(c => c.hash === hash);
+  if (card) { openLesson(card.id, card.hash, card.title, true); return; }
+  showCommandCentre(true);
+}
+window.addEventListener('popstate', routeFromHash);
+
+function toggleMobileNav() {
+  const nav = document.getElementById('mainNavLinks');
+  const btn = document.querySelector('.nav-toggle');
+  const isOpen = nav.classList.toggle('mobile-open');
+  btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+
+// A single delegated listener handles every dynamically rendered card button.
+// This avoids building onclick attributes with embedded quotes entirely,
+// which is what caused the earlier bug where clicking a card did nothing.
+// Scroll helper buttons, restored here after confirming through a genuine
+// DOM implementation that the original wiring was correct all along, an
+// earlier test of mine gave a false failure due to an incomplete test stub.
+(function () {
+  const topBtn = document.getElementById('scroll-top-btn');
+  const endBtn = document.getElementById('scroll-end-btn');
+  window.addEventListener('scroll', function () {
+    const current = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (current > 400) { topBtn.classList.add('visible'); } else { topBtn.classList.remove('visible'); }
+    if (maxScroll > 400 && current < maxScroll - 400) { endBtn.classList.add('visible'); } else { endBtn.classList.remove('visible'); }
+  });
+  topBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  endBtn.addEventListener('click', function () {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+  });
+})();
+
+function calcFeeImpact() {
+  const amount = parseFloat(document.getElementById('feeAmount2').value) || 0;
+  const years = parseFloat(document.getElementById('feeYears2').value) || 0;
+  const growth = (parseFloat(document.getElementById('feeGrowth2').value) || 0) / 100;
+  const lowFee = (parseFloat(document.getElementById('feeLow2').value) || 0) / 100;
+  const highFee = (parseFloat(document.getElementById('feeHigh2').value) || 0) / 100;
+  const el = document.getElementById('feeResult2');
+
+  if (amount < 0) {
+    el.textContent = 'Please enter zero or a positive amount invested, a negative figure here cannot be calculated correctly.';
+    return;
+  }
+  if (years < 0 || years > 100) {
+    el.textContent = 'Please enter a number of years between 0 and 100.';
+    return;
+  }
+  if (lowFee < 0 || lowFee > 0.2 || highFee < 0 || highFee > 0.2) {
+    el.textContent = 'Please enter fee percentages within a realistic range, typically well under 20%.';
+    return;
+  }
+  if (highFee < lowFee) {
+    el.textContent = 'The higher fee should not be lower than the lower fee, check your two fee figures.';
+    return;
+  }
+
+  const lowFeeValue = amount * Math.pow(1 + growth - lowFee, years);
+  const highFeeValue = amount * Math.pow(1 + growth - highFee, years);
+  const cost = lowFeeValue - highFeeValue;
+
+  if (!Number.isFinite(lowFeeValue) || !Number.isFinite(highFeeValue) || !Number.isFinite(cost)) {
+    el.textContent = 'These figures produced an unusable result, please check the values entered.';
+    return;
+  }
+
+  const fmt = n => '£' + Math.round(n).toLocaleString('en-GB');
+  el.innerHTML =
+    'Value at the lower fee: ' + fmt(lowFeeValue) + '<br>Value at the higher fee: ' + fmt(highFeeValue) + '<br>What the extra fee actually cost you: ' + fmt(cost);
+}
+
+function calcCostOfWaiting() {
+  const monthly = parseFloat(document.getElementById('cowMonthly').value) || 0;
+  const years = parseInt(document.getElementById('cowYears').value) || 0;
+  const rate = (parseFloat(document.getElementById('cowRate').value) || 0) / 100;
+  const el = document.getElementById('cowResult');
+
+  if (monthly < 0) {
+    el.textContent = 'Please enter zero or a positive monthly amount, a negative figure here cannot be calculated correctly.';
+    return;
+  }
+  if (years < 0 || years > 100) {
+    el.textContent = 'Please enter a number of years between 0 and 100.';
+    return;
+  }
+
+  const monthlyRate = rate / 12;
+  const months = years * 12;
+  const invested = monthly * months;
+  const futureValue = monthlyRate !== 0
+    ? monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate)
+    : invested;
+  const growth = futureValue - invested;
+
+  if (!Number.isFinite(futureValue) || !Number.isFinite(growth)) {
+    el.textContent = 'These figures produced an unusable result, please check the values entered.';
+    return;
+  }
+
+  const fmt = n => '£' + Math.round(n).toLocaleString('en-GB');
+  el.innerHTML =
+    'Total you contribute: ' + fmt(invested) + '<br>Growth on top of that: ' + fmt(growth) + '<br>Projected value: ' + fmt(futureValue);
+}
+
+function calcCard6() {
+  const income = parseFloat(document.getElementById('c6Income').value) || 0;
+  const essentials = parseFloat(document.getElementById('c6Essentials').value) || 0;
+  const debt = parseFloat(document.getElementById('c6Debt').value) || 0;
+  const commit = parseFloat(document.getElementById('c6Commit').value) || 0;
+  const irregular = parseFloat(document.getElementById('c6Irregular').value) || 0;
+  const emergency = parseFloat(document.getElementById('c6Emergency').value) || 0;
+  const el = document.getElementById('c6Result');
+
+  if ([income, essentials, debt, commit, irregular, emergency].some(v => v < 0)) {
+    el.textContent = 'Please enter zero or a positive amount in every field, a negative figure here cannot be calculated correctly.';
+    return;
+  }
+
+  const remaining = income - essentials - debt - commit - irregular - emergency;
+  if (remaining < 0) {
+    el.textContent = 'Your entered commitments exceed your take-home pay by £' + Math.abs(remaining).toFixed(2) + '. There is currently no unallocated amount. Review the figures and seek free support if meeting essential commitments is becoming difficult.';
+  } else {
+    el.textContent = 'Money still to allocate: £' + remaining.toFixed(2);
+  }
+}
+
+document.addEventListener('click', function (event) {
+  const btn = event.target.closest('[data-action]');
+  if (!btn) return;
+  const action = btn.getAttribute('data-action');
+  if (action === 'open-card7-dashboard') {
+    openCard7Dashboard();
+  } else if (action === 'open-lesson') {
+    openLesson(btn.getAttribute('data-item-id'), btn.getAttribute('data-hash'), btn.getAttribute('data-title'));
+  }
+});
+
+// ============================================================
+// INIT — route from whatever hash is present on load, so direct
+// and bookmarked lesson links work correctly
+// ============================================================
+routeFromHash();
+</script>
+
+</body>
+</html>
