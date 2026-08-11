@@ -488,6 +488,34 @@ function getCardState(card) {
   return card.subDashboard ? getCard7DerivedState() : getItemState(card.id);
 }
 
+// Review and Next Steps needs live progress data at the moment it opens, not static
+// text, so its content is built here rather than stored in LESSON_CONTENT like every
+// other card. openLesson calls this specifically when itemId is 'review'.
+function buildReviewContent() {
+  const learningCards = CARDS.filter(c => c.id !== 'review');
+  const completedCount = learningCards.filter(c => getCardState(c) === 'completed').length;
+  const totalCount = learningCards.length;
+  const incomplete = learningCards.filter(c => getCardState(c) !== 'completed');
+
+  const learn = `<p>Nine cards, six phases, Start Here, Stabilise, Protect, Save, Invest, and this screen, brought together the free Foundations into one connected route rather than six separate ideas. Nothing on this page adds anything new. It is a place to bring the pieces together and decide what, if anything, happens next.</p>`;
+
+  const see = `<p>You have completed ${completedCount} of ${totalCount} cards on this browser.</p>`;
+
+  const reflect = `<p>In your own words, what is one thing that surprised you across the Foundations, and one thing you intend to do differently now? This site does not see or store your answer, exactly like the reflection in Card 1, this is only for you.</p>`;
+
+  let act;
+  if (incomplete.length === 0) {
+    act = `<p>Every card on this browser is marked complete. Worth returning to any of them again in future, whenever your own numbers or circumstances genuinely change, rather than treating this as a single finished task.</p>`;
+  } else {
+    const items = incomplete.map(c => `<li><a href="#${c.hash}" onclick="openLesson('${c.id}','${c.hash}','${c.title.replace(/'/g, "&#39;")}');return false;" style="color:var(--wine);font-weight:600;">${c.title}</a></li>`).join('');
+    act = `<p>These cards are not yet marked complete on this browser:</p><ul style="margin:8px 0 0 20px;">${items}</ul>`;
+  }
+
+  const record = `<p>Completing the free Foundations is exactly that, completing the free Foundations. It does not automatically enrol you in anything further. Worth revisiting the Money Companion Workbook whenever your own numbers change, nothing here assumes a single sitting. <a href="foundations.html#money-companion-workbook" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">Open the workbook &rarr;</a></p><div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--line);"><p style="margin-bottom:0;">Builder is a separate, paid programme still in development, not something completing Foundations grants access to. If you would like to hear when it becomes available, you can register interest, with no obligation and no cost. <a href="builder.html" target="_blank" rel="noopener" style="color:var(--wine);font-weight:600;">Learn about Builder &rarr;</a></p></div><p style="margin-top:16px;font-size:12.5px;color:var(--text-3);">Discernment Wealth Academy provides general financial education and information, not personalised financial advice.</p>`;
+
+  return { learn, see, reflect, act, record };
+}
+
 // ============================================================
 // RENDER
 // ============================================================
@@ -608,7 +636,7 @@ function showCommandCentre(skipHashUpdate) {
 function openLesson(itemId, hash, title, skipHashUpdate) {
   currentOpenId = itemId;
   if (getItemState(itemId) === 'not-started') setProgress(itemId, 'in-progress');
-  const content = LESSON_CONTENT[itemId];
+  const content = itemId === 'review' ? buildReviewContent() : LESSON_CONTENT[itemId];
   if (content) {
     document.getElementById('lessonHeading').textContent = title;
     document.getElementById('lessonLearn').innerHTML = content.learn;
