@@ -334,7 +334,7 @@ img { max-width: 100%; display: block; }
   <strong>Education only.</strong> Discernment Wealth Academy provides general financial education and information. Nothing here is personalised financial advice.
 </div>
 
-<div id="cc-return-banner" style="display:none;position:sticky;top:0;z-index:50;background:var(--brass);text-align:center;padding:9px 16px;">
+<div id="cc-return-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:50;background:var(--brass);text-align:center;padding:9px 16px;">
   <a href="foundations-command-centre.html" style="color:var(--wine);font-weight:600;font-size:14px;text-decoration:none;">&larr; Return to Foundations Command Centre</a>
   <div style="font-size:11.5px;color:var(--wine-2);margin-top:1px;">You are viewing a tool from the classic Foundations page.</div>
 </div>
@@ -1397,6 +1397,25 @@ function runScamCheck() {
     });
   })();
 
+  // Show the return-to-Command-Centre banner only for members who genuinely
+  // arrived from there, either directly (referrer) or via one of the deep links the
+  // Command Centre itself opens (matching hash), not for an ordinary visitor to this page.
+  // This runs and settles the page layout before the scroll-to-anchor code below fires,
+  // since a fixed banner needs the body's own top spacing adjusted to make room for it,
+  // and that adjustment must be in place before any jump to a deep-linked section happens.
+  (function () {
+    const deepLinkAnchors = ['money-companion-workbook', 'jargon-buster', 'risk-tolerance-quiz', 'money-quiz', 'scam-checker'];
+    const cameFromCommandCentre = document.referrer.indexOf('foundations-command-centre.html') !== -1;
+    const hashMatchesDeepLink = window.location.hash && deepLinkAnchors.indexOf(window.location.hash.slice(1)) !== -1;
+    if (cameFromCommandCentre || hashMatchesDeepLink) {
+      const banner = document.getElementById('cc-return-banner');
+      if (banner) {
+        banner.style.display = 'block';
+        document.body.style.paddingTop = banner.offsetHeight + 'px';
+      }
+    }
+  })();
+
   // Explicit scroll-to-anchor safeguard. Native anchor scrolling can be unreliable
   // when opening a local file in a new tab, this reinforces it directly.
   if (window.location.hash) {
@@ -1407,19 +1426,6 @@ function runScamCheck() {
       }, 100);
     });
   }
-
-  // Show the sticky return-to-Command-Centre banner only for members who genuinely
-  // arrived from there, either directly (referrer) or via one of the deep links the
-  // Command Centre itself opens (matching hash), not for an ordinary visitor to this page.
-  (function () {
-    const deepLinkAnchors = ['money-companion-workbook', 'jargon-buster', 'risk-tolerance-quiz', 'money-quiz', 'scam-checker'];
-    const cameFromCommandCentre = document.referrer.indexOf('foundations-command-centre.html') !== -1;
-    const hashMatchesDeepLink = window.location.hash && deepLinkAnchors.indexOf(window.location.hash.slice(1)) !== -1;
-    if (cameFromCommandCentre || hashMatchesDeepLink) {
-      const banner = document.getElementById('cc-return-banner');
-      if (banner) banner.style.display = 'block';
-    }
-  })();
 </script>
 </body>
 </html>
