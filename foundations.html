@@ -1403,7 +1403,7 @@ function runScamCheck() {
     window.addEventListener('load', function () {
       setTimeout(function () {
         const target = document.getElementById(window.location.hash.slice(1));
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (target) target.scrollIntoView({ behavior: 'auto', block: 'start' });
       }, 100);
     });
   }
