@@ -1400,32 +1400,36 @@ function runScamCheck() {
   // Show the return-to-Command-Centre banner only for members who genuinely
   // arrived from there, either directly (referrer) or via one of the deep links the
   // Command Centre itself opens (matching hash), not for an ordinary visitor to this page.
-  // This runs and settles the page layout before the scroll-to-anchor code below fires,
-  // since a fixed banner needs the body's own top spacing adjusted to make room for it,
-  // and that adjustment must be in place before any jump to a deep-linked section happens.
-  (function () {
-    const deepLinkAnchors = ['money-companion-workbook', 'jargon-buster', 'risk-tolerance-quiz', 'money-quiz', 'scam-checker'];
-    const cameFromCommandCentre = document.referrer.indexOf('foundations-command-centre.html') !== -1;
-    const hashMatchesDeepLink = window.location.hash && deepLinkAnchors.indexOf(window.location.hash.slice(1)) !== -1;
-    if (cameFromCommandCentre || hashMatchesDeepLink) {
-      const banner = document.getElementById('cc-return-banner');
-      if (banner) {
-        banner.style.display = 'block';
-        document.body.style.paddingTop = banner.offsetHeight + 'px';
-      }
-    }
-  })();
+  const deepLinkAnchors = ['money-companion-workbook', 'jargon-buster', 'risk-tolerance-quiz', 'money-quiz', 'scam-checker'];
+  const cameFromCommandCentre = document.referrer.indexOf('foundations-command-centre.html') !== -1;
+  const hashMatchesDeepLink = window.location.hash && deepLinkAnchors.indexOf(window.location.hash.slice(1)) !== -1;
+  const shouldShowReturnBanner = cameFromCommandCentre || hashMatchesDeepLink;
 
   // Explicit scroll-to-anchor safeguard. Native anchor scrolling can be unreliable
   // when opening a local file in a new tab, this reinforces it directly.
-  if (window.location.hash) {
-    window.addEventListener('load', function () {
+  // The return banner is deliberately revealed AFTER this jump, and after a further
+  // pause, rather than immediately on load. On several mobile browsers, a fixed
+  // element can render before the browser's own address bar has finished collapsing,
+  // leaving it pinned to a viewport position that has not settled yet, and the
+  // banner's own text can end up hidden behind the browser's own toolbar as a result.
+  // Waiting until everything else has genuinely stopped moving avoids that race.
+  window.addEventListener('load', function () {
+    if (window.location.hash) {
       setTimeout(function () {
         const target = document.getElementById(window.location.hash.slice(1));
         if (target) target.scrollIntoView({ behavior: 'auto', block: 'start' });
       }, 100);
-    });
-  }
+    }
+    if (shouldShowReturnBanner) {
+      setTimeout(function () {
+        const banner = document.getElementById('cc-return-banner');
+        if (banner) {
+          banner.style.display = 'block';
+          document.body.style.paddingTop = banner.offsetHeight + 'px';
+        }
+      }, 450);
+    }
+  });
 </script>
 </body>
 </html>
