@@ -1405,6 +1405,25 @@ function runScamCheck() {
   const hashMatchesDeepLink = window.location.hash && deepLinkAnchors.indexOf(window.location.hash.slice(1)) !== -1;
   const shouldShowReturnBanner = cameFromCommandCentre || hashMatchesDeepLink;
 
+  // Reserve the banner's space immediately, before any anchor jump happens, not only
+  // once the banner itself becomes visible later. The banner is fixed and removed from
+  // normal page flow, so without this the page settles at its full height first, an
+  // anchor jump lands correctly against that height, and only afterward does reserving
+  // the banner's space push everything down, leaving the jump pointing at the wrong
+  // place, exactly what happened with the workbook link. Measuring height requires a
+  // brief, invisible render rather than the final visible reveal, which still waits
+  // for the delay below, specifically for the unrelated mobile browser toolbar issue.
+  if (shouldShowReturnBanner) {
+    const banner = document.getElementById('cc-return-banner');
+    if (banner) {
+      banner.style.visibility = 'hidden';
+      banner.style.display = 'block';
+      document.body.style.paddingTop = banner.offsetHeight + 'px';
+      banner.style.display = 'none';
+      banner.style.visibility = 'visible';
+    }
+  }
+
   // Explicit scroll-to-anchor safeguard. Native anchor scrolling can be unreliable
   // when opening a local file in a new tab, this reinforces it directly.
   if (window.location.hash) {
@@ -1429,7 +1448,6 @@ function runScamCheck() {
         const banner = document.getElementById('cc-return-banner');
         if (banner) {
           banner.style.display = 'block';
-          document.body.style.paddingTop = banner.offsetHeight + 'px';
           const currentScroll = window.scrollY;
           window.scrollTo(0, currentScroll + 1);
           window.scrollTo(0, currentScroll);
