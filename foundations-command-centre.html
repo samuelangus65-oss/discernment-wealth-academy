@@ -164,6 +164,19 @@ a { color: inherit; }
 .sub-dashboard-intro h3 { font-family: var(--serif); font-size: 26px; color: var(--wine); margin-bottom: 10px; }
 .sub-dashboard-intro p { font-size: 14.5px; color: var(--text-2); max-width: 640px; }
 
+/* References & Sources view */
+.reference-intro { padding: 8px 0 24px; }
+.reference-intro h3 { font-family: var(--serif); font-size: 26px; color: var(--wine); margin-bottom: 10px; }
+.reference-intro p { font-size: 14.5px; color: var(--text-2); max-width: 640px; }
+.reference-group { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 16px; }
+.reference-group h4 { font-family: var(--serif); font-size: 16.5px; font-weight: 600; color: var(--wine); margin-bottom: 4px; }
+.reference-list { list-style: none; }
+.reference-item { padding: 12px 0; border-top: 1px solid var(--line); }
+.reference-item:first-child { border-top: none; }
+.reference-item a { font-size: 14px; font-weight: 600; color: var(--wine); text-decoration: none; }
+.reference-item a:hover { color: var(--brass-deep); }
+.reference-item p { font-size: 13px; color: var(--text-2); margin-top: 4px; line-height: 1.5; }
+
 /* Footer, restored in full */
 .recommended-route { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 20px; margin: 8px 0 20px; font-size: 13px; color: var(--text-2); }
 .recommended-route strong { color: var(--wine); }
@@ -236,6 +249,7 @@ h2[tabindex]:focus-visible, h3[tabindex]:focus-visible { outline: 3px solid var(
     <div class="resource-row">
       <button class="resource-chip" onclick="openJargonBuster()">Jargon Buster</button>
       <button class="resource-chip" onclick="openScamChecker()">Protect Yourself from Scams</button>
+      <button class="resource-chip" onclick="openReferences()">References &amp; Sources</button>
       <a class="resource-chip" href="foundations.html">Prefer the classic single page view</a>
     </div>
 
@@ -295,6 +309,18 @@ h2[tabindex]:focus-visible, h3[tabindex]:focus-visible { outline: 3px solid var(
       <p>Four options, each with its own place. Premium Bonds sits alongside the ISA options here despite being neither an ISA nor an investment in the usual sense, worth exploring on its own terms rather than skipped for not fitting the other three neatly.</p>
     </div>
     <div class="card-grid" id="card7SubGrid"></div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- VIEW: REFERENCES & SOURCES -->
+  <!-- ============================================================ -->
+  <div class="view" id="view-references">
+    <button class="back-link" onclick="showCommandCentre()">&larr; Back to the Command Centre</button>
+    <div class="reference-intro">
+      <h3 id="referencesHeading" tabindex="-1">References &amp; Sources</h3>
+      <p>The primary, neutral sources behind what is taught in the Foundations, the same ones linked within individual lessons, gathered here in one place. Rules and figures can change, always check the source directly for the current position before relying on it for your own decisions.</p>
+    </div>
+    <div id="referencesContent"></div>
   </div>
 
 </main>
@@ -452,6 +478,67 @@ const CARD7_SUBS = [
 
 const ALL_ITEMS = [...CARDS.filter(c => !c.subDashboard), ...CARD7_SUBS];
 let currentOpenId = null;
+
+// ============================================================
+// REFERENCES & SOURCES
+// Member-facing, verified primary sources only, grouped by topic.
+// Kept separate from the internal Knowledge Library, which also
+// holds build history, research notes, and business decisions
+// that have no place on the live site.
+// ============================================================
+const REFERENCES = [
+  {
+    group: 'Staying Safe from Scams',
+    items: [
+      { title: 'FCA Warning List of unauthorised firms', url: 'https://www.fca.org.uk/consumers/warning-list-unauthorised-firms', note: 'Check a firm or individual asking for your money against the FCA\u2019s own official list before you invest.' },
+    ],
+  },
+  {
+    group: 'Debt',
+    items: [
+      { title: 'MoneyHelper \u2014 How to prioritise your debts', url: 'https://www.moneyhelper.org.uk/en/everyday-money/credit/how-to-prioritise-your-debts', note: 'The source behind the priority-debts-first guidance taught in Understand and Reduce Debt.' },
+      { title: 'StepChange', url: 'https://www.stepchange.org/how-we-help.aspx', note: 'Free, confidential debt advice if priority payments or minimum payments cannot be met.' },
+    ],
+  },
+  {
+    group: 'Emergency Fund and Crisis Support',
+    items: [
+      { title: 'FCA Financial Lives 2024 survey', url: 'https://www.fca.org.uk/news/press-releases/more-people-have-bank-accounts-one-ten-have-no-cash-savings', note: 'The source behind the \u201c1 in 10 UK adults with no cash savings\u201d figure.' },
+      { title: 'MoneyHelper \u2014 how much emergency savings is enough', url: 'https://www.moneyhelper.org.uk/en/savings/types-of-savings/emergency-savings-how-much-is-enough', note: 'The 3 to 6 months of cover benchmark used in Build Financial Resilience.' },
+      { title: 'Turn2us \u2014 Crisis and Resilience Fund', url: 'https://www.turn2us.org.uk/get-support/information-for-your-situation/crisis-and-resilience-fund/what-is-the-crisis-and-resilience-fund', note: 'Find your local scheme if you are facing a genuine financial shock today, not just planning for one.' },
+    ],
+  },
+  {
+    group: 'ISAs',
+    items: [
+      { title: 'GOV.UK \u2014 Individual Savings Accounts: how ISAs work', url: 'https://www.gov.uk/individual-savings-accounts/how-isas-work', note: 'The current annual ISA allowance and rules for Cash and Stocks and Shares ISAs.' },
+      { title: 'GOV.UK \u2014 Lifetime ISA', url: 'https://www.gov.uk/lifetime-isa', note: 'Confirmed rules, and the current position on the proposed First Time Buyer ISA replacement.' },
+    ],
+  },
+  {
+    group: 'Workplace Pension',
+    items: [
+      { title: 'MoneyHelper \u2014 how pension auto-enrolment works', url: 'https://www.moneyhelper.org.uk/en/pensions-and-retirement/pensions-basics/automatic-enrolment-an-introduction', note: 'Independent, neutral explanation of auto-enrolment alongside the figures taught in Know Your Workplace Pension.' },
+    ],
+  },
+];
+
+function renderReferences() {
+  const container = document.getElementById('referencesContent');
+  container.innerHTML = REFERENCES.map(group => `
+    <div class="reference-group">
+      <h4>${group.group}</h4>
+      <ul class="reference-list">
+        ${group.items.map(item => `
+          <li class="reference-item">
+            <a href="${item.url}" target="_blank" rel="noopener">${item.title} &rarr;</a>
+            <p>${item.note}</p>
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+  `).join('');
+}
 
 // ============================================================
 // PROGRESS TRACKING
@@ -675,12 +762,18 @@ function openJargonBuster() {
 function openScamChecker() {
   window.open('foundations.html#scam-checker', '_blank', 'noopener');
 }
+function openReferences(skipHashUpdate) {
+  renderReferences();
+  switchView('view-references', 'referencesHeading');
+  if (!skipHashUpdate) history.pushState(null, '', '#references');
+}
 
 // Handle direct links and the browser Back/Forward buttons
 function routeFromHash() {
   const hash = window.location.hash.replace('#', '');
   if (!hash) { showCommandCentre(true); return; }
   if (hash === 'card-7') { openCard7Dashboard(true); return; }
+  if (hash === 'references') { openReferences(true); return; }
   const card = ALL_ITEMS.find(c => c.hash === hash);
   if (card) { openLesson(card.id, card.hash, card.title, true); return; }
   showCommandCentre(true);
